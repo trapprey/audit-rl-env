@@ -1,0 +1,130 @@
+{
+  "episode_id": "EP-979176b4d48b",
+  "issues": [
+    {
+      "affected_ids": [
+        "BNK-0140-6505",
+        "INV-2025-00788"
+      ],
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "2025-10-21:TRY:KZT",
+          "DOC-0383-d78f",
+          "GL010788",
+          "GL010791"
+        ],
+        [
+          "2025-10-21:TRY:KZT",
+          "DOC-0383-d78f",
+          "GL010788",
+          "GL010789"
+        ]
+      ],
+      "expected_amount_minor": 336608,
+      "issue_id": "ISS-01",
+      "scenario": "single",
+      "type": "fx_rate"
+    },
+    {
+      "affected_ids": [
+        "BNK-8223-4868",
+        "INV-2025-00774"
+      ],
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "2025-10-14:EUR:KZT",
+          "DOC-c7ec-7ad9",
+          "GL010722",
+          "GL010723"
+        ],
+        [
+          "2025-10-14:EUR:KZT",
+          "DOC-c7ec-7ad9",
+          "GL010723",
+          "GL010725"
+        ]
+      ],
+      "expected_amount_minor": 534748,
+      "issue_id": "ISS-02",
+      "scenario": "single",
+      "type": "fx_rate"
+    },
+    {
+      "affected_ids": [
+        "BNK-1600-7757",
+        "INV-2025-00781"
+      ],
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "DOC-6084-d251",
+          "GL010772",
+          "GL010774"
+        ]
+      ],
+      "expected_amount_minor": 10097602,
+      "issue_id": "ISS-03",
+      "scenario": "single",
+      "type": "payment_allocation"
+    },
+    {
+      "affected_ids": [
+        "BNK-9431-2170",
+        "INV-2025-00803"
+      ],
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "DOC-a81a-dfab",
+          "GL010860"
+        ]
+      ],
+      "expected_amount_minor": 7707228,
+      "issue_id": "ISS-04",
+      "scenario": "single",
+      "type": "payment_allocation"
+    },
+    {
+      "affected_ids": [
+        "INV-2025-00846"
+      ],
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "DOC-3175-9b0d",
+          "GL010856"
+        ],
+        [
+          "DOC-3175-9b0d",
+          "GL010857"
+        ]
+      ],
+      "expected_amount_minor": 603161000,
+      "issue_id": "ISS-05",
+      "scenario": "single",
+      "type": "period_cutoff"
+    },
+    {
+      "affected_ids": [
+        "INV-2025-00848"
+      ],
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "DOC-8ab4-ddd8",
+          "GL010902"
+        ],
+        [
+          "DOC-8ab4-ddd8",
+          "GL010903"
+        ]
+      ],
+      "expected_amount_minor": 419385300,
+      "issue_id": "ISS-06",
+      "scenario": "single",
+      "type": "period_cutoff"
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://auditgym.local/schemas/action.schema.json",
+  "title": "action",
+  "type": "object",
+  "required": [
+    "tool"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "tool": {
+      "enum": [
+        "list_records",
+        "get_record",
+        "get_document",
+        "calculator",
+        "submit"
+      ]
+    },
+    "args": {
+      "type": "object"
+    }
+  },
+  "$defs": {
+    "list_records": {
+      "type": "object",
+      "properties": {
+        "table": {
+          "enum": [
+            "ledger",
+            "invoices",
+            "payments",
+            "fx"
+          ]
+        },
+        "cursor": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "limit": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 50
+        }
+      },
+      "required": [
+        "table"
+      ],
+      "additionalProperties": false
+    },
+    "get_record": {
+      "type": "object",
+      "properties": {
+        "table": {
+          "enum": [
+            "ledger",
+            "invoices",
+            "payments",
+            "fx"
+          ]
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "table",
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "get_document": {
+      "type": "object",
+      "properties": {
+        "doc_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "doc_id"
+      ],
+      "additionalProperties": false
+    },
+    "calculator": {
+      "type": "object",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "maxLength": 300
+        }
+      },
+      "required": [
+        "expression"
+      ],
+      "additionalProperties": false
+    },
+    "submit": {
+      "type": "object",
+      "properties": {
+        "findings": {
+          "$ref": "findings.schema.json"
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  }
+}

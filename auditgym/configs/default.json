@@ -1,0 +1,52 @@
+{
+  "config_version": "1.0",
+  "period": "month",
+  "customers": [
+    10,
+    18
+  ],
+  "invoices": [
+    50,
+    85
+  ],
+  "late_invoices": [
+    3,
+    6
+  ],
+  "foreign_currencies": [
+    1,
+    3
+  ],
+  "cross_currency_share": 0.3,
+  "errors": {
+    "duplicate_invoice": [
+      0,
+      2
+    ],
+    "payment_allocation": [
+      0,
+      2
+    ],
+    "fx_rate": [
+      0,
+      2
+    ],
+    "period_cutoff": [
+      0,
+      2
+    ]
+  },
+  "interactions": {
+    "fx_partial_boundary": 0,
+    "duplicate_fx": 0
+  },
+  "distractors": {
+    "split_payments": true,
+    "refunds": true,
+    "recurring_amounts": true,
+    "unreferenced_receipts": true,
+    "timezone_edges": true
+  },
+  "ledger_order": "chronological",
+  "presentation_seed": null
+}

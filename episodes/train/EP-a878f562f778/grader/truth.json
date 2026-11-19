@@ -1,0 +1,107 @@
+{
+  "episode_id": "EP-a878f562f778",
+  "issues": [
+    {
+      "affected_ids": [
+        "JS/25/06343",
+        "JS/25/06347"
+      ],
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "D90bf0fdbd",
+          "Db692a00e2"
+        ]
+      ],
+      "expected_amount_minor": 111326200,
+      "issue_id": "ISS-01",
+      "scenario": "single",
+      "type": "duplicate_invoice"
+    },
+    {
+      "affected_ids": [
+        "JS/25/06358",
+        "JS/25/06360"
+      ],
+      "currency": "GBP",
+      "evidence_sets": [
+        [
+          "D14aead2e1",
+          "Dc6640415d"
+        ]
+      ],
+      "expected_amount_minor": 394500,
+      "issue_id": "ISS-02",
+      "scenario": "duplicate_fx",
+      "type": "duplicate_invoice"
+    },
+    {
+      "affected_ids": [
+        "JS/25/06358",
+        "RC0443955"
+      ],
+      "currency": "GBP",
+      "evidence_sets": [
+        [
+          "2025-03-18:KZT:GBP",
+          "Dea7e27ae6",
+          "JE-4257396",
+          "JE-9a22628"
+        ],
+        [
+          "2025-03-18:KZT:GBP",
+          "Dea7e27ae6",
+          "JE-9a22628",
+          "JE-e96ae89"
+        ]
+      ],
+      "expected_amount_minor": 2199,
+      "issue_id": "ISS-03",
+      "scenario": "duplicate_fx",
+      "type": "fx_rate"
+    },
+    {
+      "affected_ids": [
+        "JS/25/06387",
+        "RC9056358"
+      ],
+      "currency": "GBP",
+      "evidence_sets": [
+        [
+          "2025-03-30:KZT:GBP",
+          "D06c6f164b",
+          "JE-76370bd",
+          "JE-abde810"
+        ],
+        [
+          "2025-03-30:KZT:GBP",
+          "D06c6f164b",
+          "JE-8f9229f",
+          "JE-abde810"
+        ]
+      ],
+      "expected_amount_minor": 98,
+      "issue_id": "ISS-04",
+      "scenario": "fx_partial_boundary",
+      "type": "fx_rate"
+    },
+    {
+      "affected_ids": [
+        "JS/25/06387",
+        "RC9056358"
+      ],
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "D06c6f164b",
+          "JE-5130e10",
+          "JE-abde810"
+        ]
+      ],
+      "expected_amount_minor": 9560071,
+      "issue_id": "ISS-05",
+      "scenario": "fx_partial_boundary",
+      "type": "payment_allocation"
+    }
+  ]
+}

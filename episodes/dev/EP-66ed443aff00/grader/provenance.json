@@ -1,0 +1,133 @@
+{
+  "clean_books_checked": true,
+  "config": {
+    "config_version": "1.0",
+    "cross_currency_share": 0.3,
+    "customers": [
+      10,
+      18
+    ],
+    "distractors": {
+      "recurring_amounts": true,
+      "refunds": true,
+      "split_payments": true,
+      "timezone_edges": true,
+      "unreferenced_receipts": true
+    },
+    "errors": {
+      "duplicate_invoice": [
+        0,
+        1
+      ],
+      "fx_rate": [
+        0,
+        1
+      ],
+      "payment_allocation": [
+        0,
+        1
+      ],
+      "period_cutoff": [
+        0,
+        1
+      ]
+    },
+    "foreign_currencies": [
+      1,
+      3
+    ],
+    "interactions": {
+      "duplicate_fx": 1,
+      "fx_partial_boundary": 1
+    },
+    "invoices": [
+      50,
+      85
+    ],
+    "late_invoices": [
+      3,
+      6
+    ],
+    "ledger_order": "chronological",
+    "period": "month",
+    "presentation_seed": null,
+    "preset": "interacting"
+  },
+  "config_digest": "a09ce14c868fd2cb",
+  "generator_version": "0.4.1",
+  "mutations": [
+    {
+      "applied_after": 7102291,
+      "applied_before": 15410069,
+      "invoice": "SI0002525",
+      "ledger_rows": [
+        "GL057679",
+        "GL057677"
+      ],
+      "op": "reduce_allocation",
+      "payment": "PMT-DE2390",
+      "scenario": "fx_partial_boundary"
+    },
+    {
+      "converted_after": 171108,
+      "converted_before": 170989,
+      "invoice": "SI0002525",
+      "ledger_rows": [
+        "GL057678",
+        "GL057680"
+      ],
+      "op": "wrong_rate_date",
+      "payment": "PMT-DE2390",
+      "policy_rate_date": "2025-04-29",
+      "scenario": "fx_partial_boundary",
+      "used_rate_date": "2025-05-01"
+    },
+    {
+      "documents": [
+        "DOC-4d9b-6c68"
+      ],
+      "duplicate": "SI0002528",
+      "ledger_rows": [
+        "GL057501",
+        "GL057502"
+      ],
+      "op": "insert_duplicate_invoice",
+      "original": "SI0002526",
+      "posted_at": "2025-04-12T04:16:00-05:00",
+      "scenario": "duplicate_fx"
+    },
+    {
+      "converted_after": 657509,
+      "converted_before": 655100,
+      "invoice": "SI0002526",
+      "ledger_rows": [
+        "GL057534",
+        "GL057532"
+      ],
+      "op": "wrong_rate_date",
+      "payment": "PMT-BA2ADA",
+      "policy_rate_date": "2025-04-14",
+      "scenario": "duplicate_fx",
+      "used_rate_date": "2025-04-11"
+    }
+  ],
+  "plan": {
+    "interactions": [
+      "fx_partial_boundary",
+      "duplicate_fx"
+    ],
+    "singles": []
+  },
+  "presentation_seed": 2009,
+  "schema_version": "1.0",
+  "seed": 2009,
+  "world": {
+    "base_currency": "EUR",
+    "foreign_currencies": [
+      "CHF",
+      "TRY"
+    ],
+    "rate_rule": "previous_local_date",
+    "timezone": "-05:00"
+  }
+}

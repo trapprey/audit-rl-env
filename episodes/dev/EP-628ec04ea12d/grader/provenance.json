@@ -1,0 +1,242 @@
+{
+  "clean_books_checked": true,
+  "config": {
+    "config_version": "1.0",
+    "cross_currency_share": 0.3,
+    "customers": [
+      10,
+      18
+    ],
+    "distractors": {
+      "recurring_amounts": true,
+      "refunds": true,
+      "split_payments": true,
+      "timezone_edges": true,
+      "unreferenced_receipts": true
+    },
+    "errors": {
+      "duplicate_invoice": [
+        1,
+        2
+      ],
+      "fx_rate": [
+        1,
+        2
+      ],
+      "payment_allocation": [
+        1,
+        2
+      ],
+      "period_cutoff": [
+        1,
+        2
+      ]
+    },
+    "foreign_currencies": [
+      1,
+      3
+    ],
+    "interactions": {
+      "duplicate_fx": 1,
+      "fx_partial_boundary": 1
+    },
+    "invoices": [
+      50,
+      85
+    ],
+    "late_invoices": [
+      3,
+      6
+    ],
+    "ledger_order": "chronological",
+    "period": "month",
+    "presentation_seed": null,
+    "preset": "heavy"
+  },
+  "config_digest": "85e441164db82dcd",
+  "generator_version": "0.4.1",
+  "mutations": [
+    {
+      "applied_after": 558285347,
+      "applied_before": 752064968,
+      "invoice": "INV-2025-06501",
+      "ledger_rows": [
+        "GL036530",
+        "GL036529"
+      ],
+      "op": "reduce_allocation",
+      "payment": "RC5084727",
+      "scenario": "fx_partial_boundary"
+    },
+    {
+      "converted_after": 966141,
+      "converted_before": 963293,
+      "invoice": "INV-2025-06501",
+      "ledger_rows": [
+        "GL036532",
+        "GL036531"
+      ],
+      "op": "wrong_rate_date",
+      "payment": "RC5084727",
+      "policy_rate_date": "2025-09-29",
+      "scenario": "fx_partial_boundary",
+      "used_rate_date": "2025-09-30"
+    },
+    {
+      "documents": [
+        "D72e13d2d3"
+      ],
+      "duplicate": "INV-2025-06497",
+      "ledger_rows": [
+        "GL036265",
+        "GL036264"
+      ],
+      "op": "insert_duplicate_invoice",
+      "original": "INV-2025-06493",
+      "posted_at": "2025-09-03T04:32:00+06:00",
+      "scenario": "duplicate_fx"
+    },
+    {
+      "converted_after": 80160,
+      "converted_before": 80200,
+      "invoice": "INV-2025-06493",
+      "ledger_rows": [
+        "GL036303",
+        "GL036302"
+      ],
+      "op": "wrong_rate_date",
+      "payment": "RC6521255",
+      "policy_rate_date": "2025-09-08",
+      "scenario": "duplicate_fx",
+      "used_rate_date": "2025-09-09"
+    },
+    {
+      "documents": [
+        "Dab5779b93"
+      ],
+      "duplicate": "INV-2025-06545",
+      "ledger_rows": [
+        "GL036419",
+        "GL036418"
+      ],
+      "op": "insert_duplicate_invoice",
+      "original": "INV-2025-06536",
+      "posted_at": "2025-09-21T18:15:00+06:00",
+      "scenario": "single"
+    },
+    {
+      "documents": [
+        "D4582b9c4c"
+      ],
+      "duplicate": "INV-2025-06541",
+      "ledger_rows": [
+        "GL036406",
+        "GL036407"
+      ],
+      "op": "insert_duplicate_invoice",
+      "original": "INV-2025-06539",
+      "posted_at": "2025-09-21T04:28:00+06:00",
+      "scenario": "single"
+    },
+    {
+      "converted_after": 326019588,
+      "converted_before": 325464082,
+      "invoice": "INV-2025-06556",
+      "ledger_rows": [
+        "GL036537",
+        "GL036538"
+      ],
+      "op": "wrong_rate_date",
+      "payment": "RC3201360",
+      "policy_rate_date": "2025-09-29",
+      "scenario": "single",
+      "used_rate_date": "2025-09-28"
+    },
+    {
+      "converted_after": 299887,
+      "converted_before": 299600,
+      "invoice": "INV-2025-06551",
+      "ledger_rows": [
+        "GL036462",
+        "GL036461"
+      ],
+      "op": "wrong_rate_date",
+      "payment": "RC7184030",
+      "policy_rate_date": "2025-09-24",
+      "scenario": "single",
+      "used_rate_date": "2025-09-25"
+    },
+    {
+      "applied_after": 73709,
+      "applied_before": 142779,
+      "invoice": "INV-2025-06534",
+      "ledger_rows": [
+        "GL036494",
+        "GL036495"
+      ],
+      "op": "reduce_allocation",
+      "payment": "RC5759095",
+      "scenario": "single"
+    },
+    {
+      "invoice": "INV-2025-06571",
+      "issued_at": "2025-10-04T20:16:00+06:00",
+      "ledger_rows": [
+        "GL036468",
+        "GL036469"
+      ],
+      "op": "early_posting",
+      "posted_at": "2025-09-26T03:34:00+06:00",
+      "scenario": "single"
+    },
+    {
+      "invoice": "INV-2025-06569",
+      "issued_at": "2025-10-01T15:21:00+06:00",
+      "ledger_rows": [
+        "GL036535",
+        "GL036534"
+      ],
+      "op": "early_posting",
+      "posted_at": "2025-09-30T14:39:00+06:00",
+      "scenario": "single"
+    },
+    {
+      "applied_after": 0,
+      "applied_before": 32302,
+      "invoice": "INV-2025-06522",
+      "ledger_rows": [
+        "GL036357"
+      ],
+      "op": "reduce_allocation",
+      "payment": "RC7051757",
+      "scenario": "single"
+    }
+  ],
+  "plan": {
+    "interactions": [
+      "fx_partial_boundary",
+      "duplicate_fx"
+    ],
+    "singles": [
+      "duplicate_invoice",
+      "duplicate_invoice",
+      "fx_rate",
+      "fx_rate",
+      "payment_allocation",
+      "period_cutoff",
+      "period_cutoff",
+      "payment_allocation"
+    ]
+  },
+  "presentation_seed": 2005,
+  "schema_version": "1.0",
+  "seed": 2005,
+  "world": {
+    "base_currency": "GBP",
+    "foreign_currencies": [
+      "KZT"
+    ],
+    "rate_rule": "previous_local_date",
+    "timezone": "+06:00"
+  }
+}

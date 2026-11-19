@@ -1,0 +1,106 @@
+{
+  "episode_id": "EP-c2dcbc23b435",
+  "issues": [
+    {
+      "affected_ids": [
+        "INV-2025-03848",
+        "INV-2025-03850"
+      ],
+      "currency": "CHF",
+      "evidence_sets": [
+        [
+          "DOC-156f-e980",
+          "DOC-8e6e-a8e0"
+        ]
+      ],
+      "expected_amount_minor": 27100,
+      "issue_id": "ISS-01",
+      "scenario": "single",
+      "type": "duplicate_invoice"
+    },
+    {
+      "affected_ids": [
+        "INV-2025-03823",
+        "PMT-FEE5D7"
+      ],
+      "currency": "GBP",
+      "evidence_sets": [
+        [
+          "2025-07-20:EUR:GBP",
+          "DOC-9993-edfb",
+          "GL085009",
+          "GL085010"
+        ],
+        [
+          "2025-07-20:EUR:GBP",
+          "DOC-9993-edfb",
+          "GL085008",
+          "GL085009"
+        ]
+      ],
+      "expected_amount_minor": 1276,
+      "issue_id": "ISS-02",
+      "scenario": "single",
+      "type": "fx_rate"
+    },
+    {
+      "affected_ids": [
+        "INV-2025-03842",
+        "PMT-F67A32"
+      ],
+      "currency": "GBP",
+      "evidence_sets": [
+        [
+          "2025-07-25:EUR:GBP",
+          "DOC-4b2e-5926",
+          "GL085060",
+          "GL085061"
+        ],
+        [
+          "2025-07-25:EUR:GBP",
+          "DOC-4b2e-5926",
+          "GL085058",
+          "GL085060"
+        ]
+      ],
+      "expected_amount_minor": 4100,
+      "issue_id": "ISS-03",
+      "scenario": "single",
+      "type": "fx_rate"
+    },
+    {
+      "affected_ids": [
+        "INV-2025-03829",
+        "PMT-81ED4F"
+      ],
+      "currency": "KWD",
+      "evidence_sets": [
+        [
+          "DOC-f118-cb8d",
+          "GL085015"
+        ]
+      ],
+      "expected_amount_minor": 1132424,
+      "issue_id": "ISS-04",
+      "scenario": "single",
+      "type": "payment_allocation"
+    },
+    {
+      "affected_ids": [
+        "INV-2025-03849",
+        "PMT-030A5F"
+      ],
+      "currency": "GBP",
+      "evidence_sets": [
+        [
+          "DOC-2855-9705",
+          "GL085004"
+        ]
+      ],
+      "expected_amount_minor": 202100,
+      "issue_id": "ISS-05",
+      "scenario": "single",
+      "type": "payment_allocation"
+    }
+  ]
+}

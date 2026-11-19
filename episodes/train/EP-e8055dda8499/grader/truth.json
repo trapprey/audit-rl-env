@@ -1,0 +1,135 @@
+{
+  "episode_id": "EP-e8055dda8499",
+  "issues": [
+    {
+      "affected_ids": [
+        "SI0000545",
+        "SI0000549"
+      ],
+      "currency": "USD",
+      "evidence_sets": [
+        [
+          "DOC-095a-8f8c",
+          "DOC-4ab2-2bec"
+        ]
+      ],
+      "expected_amount_minor": 683100,
+      "issue_id": "ISS-01",
+      "scenario": "duplicate_fx",
+      "type": "duplicate_invoice"
+    },
+    {
+      "affected_ids": [
+        "PMT-64D4D6",
+        "SI0000525"
+      ],
+      "currency": "CHF",
+      "evidence_sets": [
+        [
+          "2025-05-19:CHF:KZT",
+          "DOC-6688-01dd",
+          "GL036112",
+          "GL036113"
+        ],
+        [
+          "2025-05-19:CHF:KZT",
+          "DOC-6688-01dd",
+          "GL036113",
+          "GL036114"
+        ]
+      ],
+      "expected_amount_minor": 5721,
+      "issue_id": "ISS-02",
+      "scenario": "single",
+      "type": "fx_rate"
+    },
+    {
+      "affected_ids": [
+        "PMT-B3522A",
+        "SI0000545"
+      ],
+      "currency": "USD",
+      "evidence_sets": [
+        [
+          "2025-05-22:USD:KZT",
+          "DOC-9177-2847",
+          "GL036146",
+          "GL036147"
+        ],
+        [
+          "2025-05-22:USD:KZT",
+          "DOC-9177-2847",
+          "GL036145",
+          "GL036147"
+        ]
+      ],
+      "expected_amount_minor": 5085,
+      "issue_id": "ISS-03",
+      "scenario": "duplicate_fx",
+      "type": "fx_rate"
+    },
+    {
+      "affected_ids": [
+        "PMT-BEDAD8",
+        "SI0000521"
+      ],
+      "currency": "CHF",
+      "evidence_sets": [
+        [
+          "2025-05-30:CHF:KZT",
+          "2025-05-30:USD:KZT",
+          "DOC-44f6-2bf0",
+          "GL036224",
+          "GL036225"
+        ],
+        [
+          "2025-05-30:CHF:KZT",
+          "2025-05-30:USD:KZT",
+          "DOC-44f6-2bf0",
+          "GL036223",
+          "GL036224"
+        ]
+      ],
+      "expected_amount_minor": 82,
+      "issue_id": "ISS-04",
+      "scenario": "fx_partial_boundary",
+      "type": "fx_rate"
+    },
+    {
+      "affected_ids": [
+        "PMT-BEDAD8",
+        "SI0000521"
+      ],
+      "currency": "USD",
+      "evidence_sets": [
+        [
+          "DOC-44f6-2bf0",
+          "GL036224",
+          "GL036227"
+        ]
+      ],
+      "expected_amount_minor": 74987,
+      "issue_id": "ISS-05",
+      "scenario": "fx_partial_boundary",
+      "type": "payment_allocation"
+    },
+    {
+      "affected_ids": [
+        "PMT-CC9D0B",
+        "SI0000537"
+      ],
+      "currency": "CHF",
+      "evidence_sets": [
+        [
+          "DOC-006a-a313",
+          "GL036001",
+          "GL036002"
+        ]
+      ],
+      "expected_amount_minor": 24743,
+      "issue_id": "ISS-06",
+      "scenario": "single",
+      "type": "payment_allocation"
+    }
+  ]
+}

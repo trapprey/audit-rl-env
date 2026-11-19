@@ -1,0 +1,20 @@
+{
+  "errors": {
+    "duplicate_invoice": [
+      0,
+      2
+    ],
+    "payment_allocation": [
+      0,
+      2
+    ],
+    "fx_rate": [
+      0,
+      2
+    ],
+    "period_cutoff": [
+      0,
+      2
+    ]
+  }
+}

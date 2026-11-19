@@ -1,0 +1,216 @@
+{
+  "clean_books_checked": true,
+  "config": {
+    "config_version": "1.0",
+    "cross_currency_share": 0.3,
+    "customers": [
+      10,
+      18
+    ],
+    "distractors": {
+      "recurring_amounts": true,
+      "refunds": true,
+      "split_payments": true,
+      "timezone_edges": true,
+      "unreferenced_receipts": true
+    },
+    "errors": {
+      "duplicate_invoice": [
+        1,
+        2
+      ],
+      "fx_rate": [
+        1,
+        2
+      ],
+      "payment_allocation": [
+        1,
+        2
+      ],
+      "period_cutoff": [
+        1,
+        2
+      ]
+    },
+    "foreign_currencies": [
+      1,
+      3
+    ],
+    "interactions": {
+      "duplicate_fx": 1,
+      "fx_partial_boundary": 1
+    },
+    "invoices": [
+      50,
+      85
+    ],
+    "late_invoices": [
+      3,
+      6
+    ],
+    "ledger_order": "chronological",
+    "period": "month",
+    "presentation_seed": null,
+    "preset": "heavy"
+  },
+  "config_digest": "85e441164db82dcd",
+  "generator_version": "0.4.1",
+  "mutations": [
+    {
+      "applied_after": 270300,
+      "applied_before": 401795,
+      "invoice": "INV-2025-03255",
+      "ledger_rows": [
+        "JE-fc03aeb",
+        "JE-f1bcdb4"
+      ],
+      "op": "reduce_allocation",
+      "payment": "PMT-A2CA94",
+      "scenario": "fx_partial_boundary"
+    },
+    {
+      "converted_after": 159829,
+      "converted_before": 158967,
+      "invoice": "INV-2025-03255",
+      "ledger_rows": [
+        "JE-c3352f7",
+        "JE-4f5ab6e"
+      ],
+      "op": "wrong_rate_date",
+      "payment": "PMT-A2CA94",
+      "policy_rate_date": "2025-08-30",
+      "scenario": "fx_partial_boundary",
+      "used_rate_date": "2025-08-31"
+    },
+    {
+      "documents": [
+        "DOC-11c0-4752"
+      ],
+      "duplicate": "INV-2025-03231",
+      "ledger_rows": [
+        "JE-ffcad8b",
+        "JE-1c13566"
+      ],
+      "op": "insert_duplicate_invoice",
+      "original": "INV-2025-03229",
+      "posted_at": "2025-08-09T15:25:00+05:00",
+      "scenario": "duplicate_fx"
+    },
+    {
+      "converted_after": 232982,
+      "converted_before": 232600,
+      "invoice": "INV-2025-03229",
+      "ledger_rows": [
+        "JE-d668a86",
+        "JE-006f989"
+      ],
+      "op": "wrong_rate_date",
+      "payment": "PMT-752D3F",
+      "policy_rate_date": "2025-08-25",
+      "scenario": "duplicate_fx",
+      "used_rate_date": "2025-08-24"
+    },
+    {
+      "documents": [
+        "DOC-2c91-b7e4"
+      ],
+      "duplicate": "INV-2025-03227",
+      "ledger_rows": [
+        "JE-7d7b706",
+        "JE-5c7af45"
+      ],
+      "op": "insert_duplicate_invoice",
+      "original": "INV-2025-03224",
+      "posted_at": "2025-08-08T09:54:00+05:00",
+      "scenario": "single"
+    },
+    {
+      "converted_after": 510099,
+      "converted_before": 511200,
+      "invoice": "INV-2025-03217",
+      "ledger_rows": [
+        "JE-b80abec",
+        "JE-7b2a3be"
+      ],
+      "op": "wrong_rate_date",
+      "payment": "PMT-D00BEB",
+      "policy_rate_date": "2025-08-06",
+      "scenario": "single",
+      "used_rate_date": "2025-08-03"
+    },
+    {
+      "applied_after": 19083,
+      "applied_before": 52440,
+      "invoice": "INV-2025-03248",
+      "ledger_rows": [
+        "JE-4197b69",
+        "JE-6f08c02"
+      ],
+      "op": "reduce_allocation",
+      "payment": "PMT-36590C",
+      "scenario": "single"
+    },
+    {
+      "converted_after": 583625,
+      "converted_before": 576840,
+      "invoice": "INV-2025-03270",
+      "ledger_rows": [
+        "JE-3a04308",
+        "JE-20bad5f"
+      ],
+      "op": "wrong_rate_date",
+      "payment": "PMT-C479A7",
+      "policy_rate_date": "2025-08-30",
+      "scenario": "single",
+      "used_rate_date": "2025-08-25"
+    },
+    {
+      "invoice": "INV-2025-03285",
+      "issued_at": "2025-09-05T20:27:00+05:00",
+      "ledger_rows": [
+        "JE-a6f71e7",
+        "JE-086f4fa"
+      ],
+      "op": "early_posting",
+      "posted_at": "2025-08-31T03:03:00+05:00",
+      "scenario": "single"
+    },
+    {
+      "invoice": "INV-2025-03282",
+      "issued_at": "2025-09-02T22:25:00+05:00",
+      "ledger_rows": [
+        "JE-8e3b559",
+        "JE-7c16f9c"
+      ],
+      "op": "early_posting",
+      "posted_at": "2025-08-29T05:21:00+05:00",
+      "scenario": "single"
+    }
+  ],
+  "plan": {
+    "interactions": [
+      "fx_partial_boundary",
+      "duplicate_fx"
+    ],
+    "singles": [
+      "duplicate_invoice",
+      "fx_rate",
+      "payment_allocation",
+      "fx_rate",
+      "period_cutoff",
+      "period_cutoff"
+    ]
+  },
+  "presentation_seed": 1006,
+  "schema_version": "1.0",
+  "seed": 1006,
+  "world": {
+    "base_currency": "EUR",
+    "foreign_currencies": [
+      "GBP",
+      "JPY"
+    ],
+    "rate_rule": "transaction_local_date",
+    "timezone": "+05:00"
+  }
+}

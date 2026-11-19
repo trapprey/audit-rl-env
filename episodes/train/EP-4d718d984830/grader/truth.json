@@ -1,0 +1,217 @@
+{
+  "episode_id": "EP-4d718d984830",
+  "issues": [
+    {
+      "affected_ids": [
+        "INV-2025-03224",
+        "INV-2025-03227"
+      ],
+      "currency": "JPY",
+      "evidence_sets": [
+        [
+          "DOC-2c91-b7e4",
+          "DOC-c074-a701"
+        ]
+      ],
+      "expected_amount_minor": 1211103,
+      "issue_id": "ISS-01",
+      "scenario": "single",
+      "type": "duplicate_invoice"
+    },
+    {
+      "affected_ids": [
+        "INV-2025-03229",
+        "INV-2025-03231"
+      ],
+      "currency": "EUR",
+      "evidence_sets": [
+        [
+          "DOC-11c0-4752",
+          "DOC-680a-01e7"
+        ]
+      ],
+      "expected_amount_minor": 232600,
+      "issue_id": "ISS-02",
+      "scenario": "duplicate_fx",
+      "type": "duplicate_invoice"
+    },
+    {
+      "affected_ids": [
+        "INV-2025-03217",
+        "PMT-D00BEB"
+      ],
+      "currency": "GBP",
+      "evidence_sets": [
+        [
+          "2025-08-06:GBP:EUR",
+          "DOC-8d0d-e738",
+          "JE-7b2a3be",
+          "JE-886ac22"
+        ],
+        [
+          "2025-08-06:GBP:EUR",
+          "DOC-8d0d-e738",
+          "JE-886ac22",
+          "JE-b80abec"
+        ]
+      ],
+      "expected_amount_minor": 1101,
+      "issue_id": "ISS-03",
+      "scenario": "single",
+      "type": "fx_rate"
+    },
+    {
+      "affected_ids": [
+        "INV-2025-03229",
+        "PMT-752D3F"
+      ],
+      "currency": "EUR",
+      "evidence_sets": [
+        [
+          "2025-08-25:JPY:EUR",
+          "DOC-72d0-49b6",
+          "JE-006f989",
+          "JE-c66375c"
+        ],
+        [
+          "2025-08-25:JPY:EUR",
+          "DOC-72d0-49b6",
+          "JE-c66375c",
+          "JE-d668a86"
+        ]
+      ],
+      "expected_amount_minor": 382,
+      "issue_id": "ISS-04",
+      "scenario": "duplicate_fx",
+      "type": "fx_rate"
+    },
+    {
+      "affected_ids": [
+        "INV-2025-03255",
+        "PMT-A2CA94"
+      ],
+      "currency": "EUR",
+      "evidence_sets": [
+        [
+          "2025-08-30:JPY:EUR",
+          "DOC-18ed-93ee",
+          "JE-4f5ab6e",
+          "JE-f1bcdb4"
+        ],
+        [
+          "2025-08-30:JPY:EUR",
+          "DOC-18ed-93ee",
+          "JE-c3352f7",
+          "JE-f1bcdb4"
+        ]
+      ],
+      "expected_amount_minor": 862,
+      "issue_id": "ISS-05",
+      "scenario": "fx_partial_boundary",
+      "type": "fx_rate"
+    },
+    {
+      "affected_ids": [
+        "INV-2025-03270",
+        "PMT-C479A7"
+      ],
+      "currency": "JPY",
+      "evidence_sets": [
+        [
+          "2025-08-30:GBP:EUR",
+          "2025-08-30:JPY:EUR",
+          "DOC-a67d-eb7a",
+          "JE-20bad5f",
+          "JE-89b33c6"
+        ],
+        [
+          "2025-08-30:GBP:EUR",
+          "2025-08-30:JPY:EUR",
+          "DOC-a67d-eb7a",
+          "JE-3a04308",
+          "JE-89b33c6"
+        ]
+      ],
+      "expected_amount_minor": 6785,
+      "issue_id": "ISS-06",
+      "scenario": "single",
+      "type": "fx_rate"
+    },
+    {
+      "affected_ids": [
+        "INV-2025-03248",
+        "PMT-36590C"
+      ],
+      "currency": "JPY",
+      "evidence_sets": [
+        [
+          "DOC-7d6c-fd1c",
+          "JE-4197b69",
+          "JE-6f08c02"
+        ]
+      ],
+      "expected_amount_minor": 33357,
+      "issue_id": "ISS-07",
+      "scenario": "single",
+      "type": "payment_allocation"
+    },
+    {
+      "affected_ids": [
+        "INV-2025-03255",
+        "PMT-A2CA94"
+      ],
+      "currency": "JPY",
+      "evidence_sets": [
+        [
+          "DOC-18ed-93ee",
+          "JE-f1bcdb4",
+          "JE-fc03aeb"
+        ]
+      ],
+      "expected_amount_minor": 131495,
+      "issue_id": "ISS-08",
+      "scenario": "fx_partial_boundary",
+      "type": "payment_allocation"
+    },
+    {
+      "affected_ids": [
+        "INV-2025-03282"
+      ],
+      "currency": "EUR",
+      "evidence_sets": [
+        [
+          "DOC-b5ac-5a62",
+          "JE-8e3b559"
+        ],
+        [
+          "DOC-b5ac-5a62",
+          "JE-7c16f9c"
+        ]
+      ],
+      "expected_amount_minor": 711300,
+      "issue_id": "ISS-09",
+      "scenario": "single",
+      "type": "period_cutoff"
+    },
+    {
+      "affected_ids": [
+        "INV-2025-03285"
+      ],
+      "currency": "GBP",
+      "evidence_sets": [
+        [
+          "DOC-4d00-5a82",
+          "JE-a6f71e7"
+        ],
+        [
+          "DOC-4d00-5a82",
+          "JE-086f4fa"
+        ]
+      ],
+      "expected_amount_minor": 1124800,
+      "issue_id": "ISS-10",
+      "scenario": "single",
+      "type": "period_cutoff"
+    }
+  ]
+}

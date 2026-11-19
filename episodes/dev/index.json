@@ -1,0 +1,83 @@
+[
+  {
+    "config": {
+      "preset": "clean"
+    },
+    "episode_id": "EP-0566f679d675",
+    "issues": 0,
+    "seed": 2001
+  },
+  {
+    "config": {
+      "preset": "single"
+    },
+    "episode_id": "EP-ab1e9344aeac",
+    "issues": 4,
+    "seed": 2002
+  },
+  {
+    "config": {
+      "preset": "standard"
+    },
+    "episode_id": "EP-ad67194806b5",
+    "issues": 3,
+    "seed": 2003
+  },
+  {
+    "config": {
+      "preset": "interacting"
+    },
+    "episode_id": "EP-5d7a93b0bb87",
+    "issues": 8,
+    "seed": 2004
+  },
+  {
+    "config": {
+      "preset": "heavy"
+    },
+    "episode_id": "EP-628ec04ea12d",
+    "issues": 12,
+    "seed": 2005
+  },
+  {
+    "config": {
+      "preset": "clean"
+    },
+    "episode_id": "EP-42ff31f12806",
+    "issues": 0,
+    "seed": 2006
+  },
+  {
+    "config": {
+      "preset": "standard"
+    },
+    "episode_id": "EP-979176b4d48b",
+    "issues": 6,
+    "seed": 2007
+  },
+  {
+    "config": {
+      "preset": "quarter"
+    },
+    "episode_id": "EP-a50a179c1266",
+    "issues": 5,
+    "seed": 2008
+  },
+  {
+    "config": {
+      "preset": "interacting"
+    },
+    "episode_id": "EP-66ed443aff00",
+    "issues": 4,
+    "seed": 2009
+  },
+  {
+    "config": {
+      "ledger_order": "shuffled",
+      "preset": "standard"
+    },
+    "episode_id": "EP-8c5d6896756e",
+    "issues": 1,
+    "seed": 2010
+  }
+]

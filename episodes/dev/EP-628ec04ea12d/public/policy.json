@@ -1,0 +1,59 @@
+{
+  "amount_tolerance_minor": 1,
+  "bookkeeping": {
+    "invoice": "On issue: debit 1200 and credit 4000 for total_minor in invoice currency, timestamped at issue.",
+    "open_items": "Invoices may stay partly or fully unpaid; that alone is not an error.",
+    "receipt": "Debit 1010 in payment currency. Each invoice_refs entry is applied in full: credit 1200 in the same currency, or, when currencies differ, credit 1950 in payment currency, then debit 1950 and credit 1200 in invoice currency for the converted amount.",
+    "refund": "A refund of an unapplied receipt debits 2400 and credits 1010.",
+    "unreferenced_receipt": "A receipt with invoice_refs null is credited to 2400 until it is identified."
+  },
+  "chart_of_accounts": {
+    "1010": "Bank",
+    "1200": "Accounts receivable",
+    "1950": "Currency exchange clearing",
+    "2400": "Unapplied customer receipts",
+    "4000": "Revenue"
+  },
+  "findings": {
+    "duplicate_invoice": {
+      "affected_ids": "invoice_id of the original and of the duplicate",
+      "amount": "total_minor of the duplicate, in invoice currency",
+      "evidence": "doc_id of both invoice documents",
+      "meaning": "The same invoice is issued and booked twice under two invoice numbers."
+    },
+    "fx_rate": {
+      "affected_ids": "payment_id and invoice_id",
+      "amount": "absolute difference between the booked invoice-currency amount and the policy conversion, in invoice currency",
+      "evidence": "payment doc_id, the 1950 payment-currency row, the 1200 or 1950 invoice-currency row, and fx_id of every non-base rate used",
+      "meaning": "A cross-currency receipt was converted with a rate other than the one the policy requires."
+    },
+    "payment_allocation": {
+      "affected_ids": "payment_id and invoice_id",
+      "amount": "referenced amount that was not applied, in payment currency",
+      "evidence": "payment doc_id, its 2400 ledger row and every ledger row that applied this payment in payment currency",
+      "meaning": "A receipt references an invoice but the ledger applied less than the referenced amount."
+    },
+    "period_cutoff": {
+      "affected_ids": "invoice_id",
+      "amount": "total_minor of the invoice, in invoice currency",
+      "evidence": "invoice doc_id and the 1200 or 4000 ledger row that booked it",
+      "meaning": "An invoice issued outside the reporting period was booked inside it."
+    }
+  },
+  "fx": {
+    "cross_rate": "Convert through the base currency using both rates of the same date.",
+    "formula": "round_half_even(amount_minor / 10^exp_source * rate_source / rate_target * 10^exp_target); rate of the base currency is 1.",
+    "quote": "1 unit of source_currency = rate units of target_currency; target_currency is the base currency.",
+    "rate_date": "previous_local_date",
+    "rate_date_rule": "Use the rate dated on the calendar day before the receipt's date in the company timezone.",
+    "rounding": "ROUND_HALF_EVEN",
+    "table": "fx"
+  },
+  "period": {
+    "end": "2025-10-01T00:00:00+06:00",
+    "end_exclusive": true,
+    "rule": "A record belongs to the period when its instant is on or after start and before end. Compare instants, not the calendar date printed in another offset.",
+    "start": "2025-09-01T00:00:00+06:00",
+    "timezone": "+06:00"
+  }
+}

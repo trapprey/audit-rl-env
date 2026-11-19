@@ -1,0 +1,189 @@
+{
+  "clean_books_checked": true,
+  "config": {
+    "config_version": "1.0",
+    "cross_currency_share": 0.3,
+    "customers": [
+      10,
+      18
+    ],
+    "distractors": {
+      "recurring_amounts": true,
+      "refunds": true,
+      "split_payments": true,
+      "timezone_edges": true,
+      "unreferenced_receipts": true
+    },
+    "errors": {
+      "duplicate_invoice": [
+        0,
+        1
+      ],
+      "fx_rate": [
+        0,
+        1
+      ],
+      "payment_allocation": [
+        0,
+        1
+      ],
+      "period_cutoff": [
+        0,
+        1
+      ]
+    },
+    "foreign_currencies": [
+      1,
+      3
+    ],
+    "interactions": {
+      "duplicate_fx": 1,
+      "fx_partial_boundary": 1
+    },
+    "invoices": [
+      50,
+      85
+    ],
+    "late_invoices": [
+      3,
+      6
+    ],
+    "ledger_order": "chronological",
+    "period": "month",
+    "presentation_seed": null,
+    "preset": "interacting"
+  },
+  "config_digest": "a09ce14c868fd2cb",
+  "generator_version": "0.4.1",
+  "mutations": [
+    {
+      "applied_after": 146540,
+      "applied_before": 363270,
+      "invoice": "SI0002879",
+      "ledger_rows": [
+        "JE-6f68aab",
+        "JE-e54a85a"
+      ],
+      "op": "reduce_allocation",
+      "payment": "BNK-3275-1053",
+      "scenario": "fx_partial_boundary"
+    },
+    {
+      "converted_after": 552069,
+      "converted_before": 554380,
+      "invoice": "SI0002879",
+      "ledger_rows": [
+        "JE-7ae3702",
+        "JE-95259bf"
+      ],
+      "op": "wrong_rate_date",
+      "payment": "BNK-3275-1053",
+      "policy_rate_date": "2025-07-30",
+      "scenario": "fx_partial_boundary",
+      "used_rate_date": "2025-07-31"
+    },
+    {
+      "documents": [
+        "D47591821a"
+      ],
+      "duplicate": "SI0002836",
+      "ledger_rows": [
+        "JE-020924a",
+        "JE-770b229"
+      ],
+      "op": "insert_duplicate_invoice",
+      "original": "SI0002826",
+      "posted_at": "2025-07-05T17:35:00+05:00",
+      "scenario": "duplicate_fx"
+    },
+    {
+      "converted_after": 4971929,
+      "converted_before": 5004700,
+      "invoice": "SI0002826",
+      "ledger_rows": [
+        "JE-a6b8a94",
+        "JE-154f04f"
+      ],
+      "op": "wrong_rate_date",
+      "payment": "BNK-0211-2491",
+      "policy_rate_date": "2025-07-12",
+      "scenario": "duplicate_fx",
+      "used_rate_date": "2025-07-13"
+    },
+    {
+      "converted_after": 34309502,
+      "converted_before": 34535646,
+      "invoice": "SI0002845",
+      "ledger_rows": [
+        "JE-df700a1",
+        "JE-3b79e8e"
+      ],
+      "op": "wrong_rate_date",
+      "payment": "BNK-3447-5916",
+      "policy_rate_date": "2025-07-13",
+      "scenario": "single",
+      "used_rate_date": "2025-07-12"
+    },
+    {
+      "documents": [
+        "Df14fcb113"
+      ],
+      "duplicate": "SI0002852",
+      "ledger_rows": [
+        "JE-65e80d6",
+        "JE-3ee0ace"
+      ],
+      "op": "insert_duplicate_invoice",
+      "original": "SI0002850",
+      "posted_at": "2025-07-12T08:41:00+05:00",
+      "scenario": "single"
+    },
+    {
+      "applied_after": 0,
+      "applied_before": 245152340,
+      "invoice": "SI0002824",
+      "ledger_rows": [
+        "JE-19ee15c"
+      ],
+      "op": "reduce_allocation",
+      "payment": "BNK-4827-3608",
+      "scenario": "single"
+    },
+    {
+      "invoice": "SI0002886",
+      "issued_at": "2025-08-01T01:24:00+05:00",
+      "ledger_rows": [
+        "JE-b1381c8",
+        "JE-06daf0a"
+      ],
+      "op": "early_posting",
+      "posted_at": "2025-07-27T19:55:00+05:00",
+      "scenario": "single"
+    }
+  ],
+  "plan": {
+    "interactions": [
+      "fx_partial_boundary",
+      "duplicate_fx"
+    ],
+    "singles": [
+      "fx_rate",
+      "duplicate_invoice",
+      "payment_allocation",
+      "period_cutoff"
+    ]
+  },
+  "presentation_seed": 2004,
+  "schema_version": "1.0",
+  "seed": 2004,
+  "world": {
+    "base_currency": "KZT",
+    "foreign_currencies": [
+      "AED",
+      "CHF",
+      "KWD"
+    ],
+    "rate_rule": "previous_local_date",
+    "timezone": "+05:00"
+  }
+}

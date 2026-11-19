@@ -1,0 +1,24 @@
+{
+  "clean_episodes": 40,
+  "episodes": 240,
+  "generation_failures": [],
+  "issue_counts": {
+    "duplicate_invoice": 298,
+    "fx_rate": 374,
+    "payment_allocation": 303,
+    "period_cutoff": 218
+  },
+  "ledger_rows": [
+    186,
+    759
+  ],
+  "max_generate_seconds": 0.02145339990966022,
+  "max_pages_to_read_all": 30,
+  "mean_episode_seconds": 0.01196462458416742,
+  "scenario_counts": {
+    "duplicate_fx": 160,
+    "fx_partial_boundary": 160,
+    "single": 873
+  },
+  "scripted_auditor_imperfect": []
+}

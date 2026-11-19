@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://auditgym.local/schemas/policy.schema.json",
+  "title": "policy",
+  "type": "object",
+  "properties": {
+    "period": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(Z|[+-]\\d{2}:\\d{2})$"
+        },
+        "end": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(Z|[+-]\\d{2}:\\d{2})$"
+        },
+        "end_exclusive": {
+          "const": true
+        },
+        "timezone": {
+          "type": "string",
+          "pattern": "^[+-]\\d{2}:\\d{2}$"
+        },
+        "rule": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "end_exclusive",
+        "timezone",
+        "rule"
+      ],
+      "additionalProperties": false
+    },
+    "fx": {
+      "type": "object",
+      "properties": {
+        "table": {
+          "const": "fx"
+        },
+        "quote": {
+          "type": "string"
+        },
+        "rate_date": {
+          "enum": [
+            "transaction_local_date",
+            "previous_local_date"
+          ]
+        },
+        "rate_date_rule": {
+          "type": "string"
+        },
+        "cross_rate": {
+          "type": "string"
+        },
+        "formula": {
+          "type": "string"
+        },
+        "rounding": {
+          "const": "ROUND_HALF_EVEN"
+        }
+      },
+      "required": [
+        "table",
+        "quote",
+        "rate_date",
+        "rate_date_rule",
+        "cross_rate",
+        "formula",
+        "rounding"
+      ],
+      "additionalProperties": false
+    },
+    "bookkeeping": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "chart_of_accounts": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "findings": {
+      "type": "object",
+      "required": [
+        "duplicate_invoice",
+        "payment_allocation",
+        "fx_rate",
+        "period_cutoff"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "duplicate_invoice": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "payment_allocation": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "fx_rate": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "period_cutoff": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "amount_tolerance_minor": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "required": [
+    "period",
+    "fx",
+    "bookkeeping",
+    "chart_of_accounts",
+    "findings",
+    "amount_tolerance_minor"
+  ],
+  "additionalProperties": false
+}

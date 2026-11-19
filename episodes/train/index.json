@@ -1,0 +1,83 @@
+[
+  {
+    "config": {
+      "preset": "clean"
+    },
+    "episode_id": "EP-567720562ce4",
+    "issues": 0,
+    "seed": 1001
+  },
+  {
+    "config": {
+      "preset": "standard"
+    },
+    "episode_id": "EP-7cf3bce9f432",
+    "issues": 6,
+    "seed": 1002
+  },
+  {
+    "config": {
+      "preset": "single"
+    },
+    "episode_id": "EP-f07343cde2a2",
+    "issues": 4,
+    "seed": 1003
+  },
+  {
+    "config": {
+      "preset": "interacting"
+    },
+    "episode_id": "EP-a878f562f778",
+    "issues": 5,
+    "seed": 1004
+  },
+  {
+    "config": {
+      "preset": "standard"
+    },
+    "episode_id": "EP-c2dcbc23b435",
+    "issues": 5,
+    "seed": 1005
+  },
+  {
+    "config": {
+      "preset": "heavy"
+    },
+    "episode_id": "EP-4d718d984830",
+    "issues": 10,
+    "seed": 1006
+  },
+  {
+    "config": {
+      "preset": "clean"
+    },
+    "episode_id": "EP-f1f45e0dbb5c",
+    "issues": 0,
+    "seed": 1007
+  },
+  {
+    "config": {
+      "preset": "quarter"
+    },
+    "episode_id": "EP-f20bf65f49f5",
+    "issues": 6,
+    "seed": 1008
+  },
+  {
+    "config": {
+      "preset": "interacting"
+    },
+    "episode_id": "EP-e8055dda8499",
+    "issues": 6,
+    "seed": 1009
+  },
+  {
+    "config": {
+      "ledger_order": "shuffled",
+      "preset": "standard"
+    },
+    "episode_id": "EP-ab836a09ef5a",
+    "issues": 3,
+    "seed": 1010
+  }
+]

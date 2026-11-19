@@ -1,0 +1,118 @@
+{
+  "clean_books_checked": true,
+  "config": {
+    "config_version": "1.0",
+    "cross_currency_share": 0.3,
+    "customers": [
+      10,
+      18
+    ],
+    "distractors": {
+      "recurring_amounts": true,
+      "refunds": true,
+      "split_payments": true,
+      "timezone_edges": true,
+      "unreferenced_receipts": true
+    },
+    "errors": {
+      "duplicate_invoice": [
+        0,
+        2
+      ],
+      "fx_rate": [
+        0,
+        2
+      ],
+      "payment_allocation": [
+        0,
+        2
+      ],
+      "period_cutoff": [
+        0,
+        2
+      ]
+    },
+    "foreign_currencies": [
+      1,
+      3
+    ],
+    "interactions": {
+      "duplicate_fx": 0,
+      "fx_partial_boundary": 0
+    },
+    "invoices": [
+      50,
+      85
+    ],
+    "late_invoices": [
+      3,
+      6
+    ],
+    "ledger_order": "shuffled",
+    "period": "month",
+    "presentation_seed": null,
+    "preset": "standard"
+  },
+  "config_digest": "8b54a1cb728ff2f9",
+  "generator_version": "0.4.1",
+  "mutations": [
+    {
+      "documents": [
+        "D9f959053e"
+      ],
+      "duplicate": "KA/26/05453",
+      "ledger_rows": [
+        "GL020521",
+        "GL020400"
+      ],
+      "op": "insert_duplicate_invoice",
+      "original": "KA/26/05446",
+      "posted_at": "2026-03-17T08:45:00-03:00",
+      "scenario": "single"
+    },
+    {
+      "invoice": "KA/26/05493",
+      "issued_at": "2026-04-01T14:15:00-03:00",
+      "ledger_rows": [
+        "GL020444",
+        "GL020538"
+      ],
+      "op": "early_posting",
+      "posted_at": "2026-03-30T19:25:00-03:00",
+      "scenario": "single"
+    },
+    {
+      "documents": [
+        "Dab7c97a08"
+      ],
+      "duplicate": "KA/26/05420",
+      "ledger_rows": [
+        "GL020570",
+        "GL020561"
+      ],
+      "op": "insert_duplicate_invoice",
+      "original": "KA/26/05418",
+      "posted_at": "2026-03-06T19:34:00-03:00",
+      "scenario": "single"
+    }
+  ],
+  "plan": {
+    "interactions": [],
+    "singles": [
+      "duplicate_invoice",
+      "period_cutoff",
+      "duplicate_invoice"
+    ]
+  },
+  "presentation_seed": 1010,
+  "schema_version": "1.0",
+  "seed": 1010,
+  "world": {
+    "base_currency": "GBP",
+    "foreign_currencies": [
+      "TRY"
+    ],
+    "rate_rule": "transaction_local_date",
+    "timezone": "-03:00"
+  }
+}

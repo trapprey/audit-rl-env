@@ -1,0 +1,120 @@
+{
+  "clean_books_checked": true,
+  "config": {
+    "config_version": "1.0",
+    "cross_currency_share": 0.3,
+    "customers": [
+      10,
+      18
+    ],
+    "distractors": {
+      "recurring_amounts": true,
+      "refunds": true,
+      "split_payments": true,
+      "timezone_edges": true,
+      "unreferenced_receipts": true
+    },
+    "errors": {
+      "duplicate_invoice": 1,
+      "fx_rate": 1,
+      "payment_allocation": 1,
+      "period_cutoff": 1
+    },
+    "foreign_currencies": [
+      1,
+      3
+    ],
+    "interactions": {
+      "duplicate_fx": 0,
+      "fx_partial_boundary": 0
+    },
+    "invoices": [
+      50,
+      85
+    ],
+    "late_invoices": [
+      3,
+      6
+    ],
+    "ledger_order": "chronological",
+    "period": "month",
+    "presentation_seed": null,
+    "preset": "single"
+  },
+  "config_digest": "920b148101e9d97b",
+  "generator_version": "0.4.1",
+  "mutations": [
+    {
+      "applied_after": 3793,
+      "applied_before": 6798,
+      "invoice": "TM/26/06278",
+      "ledger_rows": [
+        "JE-c8b1990",
+        "JE-9033dfe"
+      ],
+      "op": "reduce_allocation",
+      "payment": "PMT-1617CE",
+      "scenario": "single"
+    },
+    {
+      "invoice": "TM/26/06344",
+      "issued_at": "2026-07-01T02:13:00+03:00",
+      "ledger_rows": [
+        "JE-8193e5d",
+        "JE-20f19c7"
+      ],
+      "op": "early_posting",
+      "posted_at": "2026-06-30T00:31:00+03:00",
+      "scenario": "single"
+    },
+    {
+      "documents": [
+        "DOC-fa29-2f0c"
+      ],
+      "duplicate": "TM/26/06339",
+      "ledger_rows": [
+        "JE-cfa0f60",
+        "JE-5fbaaec"
+      ],
+      "op": "insert_duplicate_invoice",
+      "original": "TM/26/06335",
+      "posted_at": "2026-06-28T16:24:00+03:00",
+      "scenario": "single"
+    },
+    {
+      "converted_after": 32706217,
+      "converted_before": 33125153,
+      "invoice": "TM/26/06285",
+      "ledger_rows": [
+        "JE-4373bae",
+        "JE-9262a99"
+      ],
+      "op": "wrong_rate_date",
+      "payment": "PMT-C7FCD8",
+      "policy_rate_date": "2026-06-12",
+      "scenario": "single",
+      "used_rate_date": "2026-06-04"
+    }
+  ],
+  "plan": {
+    "interactions": [],
+    "singles": [
+      "payment_allocation",
+      "period_cutoff",
+      "duplicate_invoice",
+      "fx_rate"
+    ]
+  },
+  "presentation_seed": 1003,
+  "schema_version": "1.0",
+  "seed": 1003,
+  "world": {
+    "base_currency": "KZT",
+    "foreign_currencies": [
+      "EUR",
+      "USD"
+    ],
+    "rate_rule": "previous_local_date",
+    "timezone": "+03:00"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "episode_id": "EP-a50a179c1266",
+  "issues": [
+    {
+      "affected_ids": [
+        "KZ/26/04263",
+        "KZ/26/04266"
+      ],
+      "currency": "EUR",
+      "evidence_sets": [
+        [
+          "DOC-a9b4-31b1",
+          "DOC-bece-11f5"
+        ]
+      ],
+      "expected_amount_minor": 63000,
+      "issue_id": "ISS-01",
+      "scenario": "single",
+      "type": "duplicate_invoice"
+    },
+    {
+      "affected_ids": [
+        "KZ/26/04331",
+        "PMT-463E45"
+      ],
+      "currency": "USD",
+      "evidence_sets": [
+        [
+          "2026-09-26:AED:USD",
+          "DOC-0b52-04d8",
+          "GL080811",
+          "GL080814"
+        ],
+        [
+          "2026-09-26:AED:USD",
+          "DOC-0b52-04d8",
+          "GL080813",
+          "GL080814"
+        ]
+      ],
+      "expected_amount_minor": 15254,
+      "issue_id": "ISS-02",
+      "scenario": "single",
+      "type": "fx_rate"
+    },
+    {
+      "affected_ids": [
+        "KZ/26/04289",
+        "PMT-0F80B3"
+      ],
+      "currency": "USD",
+      "evidence_sets": [
+        [
+          "DOC-c292-f6fd",
+          "GL080713",
+          "GL080714"
+        ]
+      ],
+      "expected_amount_minor": 29296,
+      "issue_id": "ISS-03",
+      "scenario": "single",
+      "type": "payment_allocation"
+    },
+    {
+      "affected_ids": [
+        "KZ/26/04343"
+      ],
+      "currency": "AED",
+      "evidence_sets": [
+        [
+          "DOC-812e-a621",
+          "GL080833"
+        ],
+        [
+          "DOC-812e-a621",
+          "GL080834"
+        ]
+      ],
+      "expected_amount_minor": 1044000,
+      "issue_id": "ISS-04",
+      "scenario": "single",
+      "type": "period_cutoff"
+    },
+    {
+      "affected_ids": [
+        "KZ/26/04346"
+      ],
+      "currency": "USD",
+      "evidence_sets": [
+        [
+          "DOC-9cc7-d48b",
+          "GL080820"
+        ],
+        [
+          "DOC-9cc7-d48b",
+          "GL080819"
+        ]
+      ],
+      "expected_amount_minor": 98400,
+      "issue_id": "ISS-05",
+      "scenario": "single",
+      "type": "period_cutoff"
+    }
+  ]
+}

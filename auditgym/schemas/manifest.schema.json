@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://auditgym.local/schemas/manifest.schema.json",
+  "title": "manifest",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "string"
+    },
+    "episode_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "base_currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "period_start": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(Z|[+-]\\d{2}:\\d{2})$"
+    },
+    "period_end": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(Z|[+-]\\d{2}:\\d{2})$"
+    },
+    "period_end_exclusive": {
+      "const": true
+    },
+    "timezone": {
+      "type": "string",
+      "pattern": "^[+-]\\d{2}:\\d{2}$"
+    },
+    "currency_exponents": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 4
+      }
+    },
+    "record_counts": {
+      "type": "object",
+      "properties": {
+        "ledger": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "invoices": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "payments": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "fx": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "ledger",
+        "invoices",
+        "payments",
+        "fx"
+      ],
+      "additionalProperties": false
+    },
+    "document_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "rounding": {
+      "type": "object",
+      "properties": {
+        "money": {
+          "type": "string"
+        },
+        "fx": {
+          "const": "ROUND_HALF_EVEN"
+        },
+        "amount_tolerance_minor": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "money",
+        "fx",
+        "amount_tolerance_minor"
+      ],
+      "additionalProperties": false
+    },
+    "generator_version": {
+      "type": "string"
+    },
+    "config_version": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "episode_id",
+    "base_currency",
+    "period_start",
+    "period_end",
+    "period_end_exclusive",
+    "timezone",
+    "currency_exponents",
+    "record_counts",
+    "document_count",
+    "rounding",
+    "generator_version",
+    "config_version"
+  ],
+  "additionalProperties": false
+}

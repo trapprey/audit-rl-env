@@ -1,0 +1,62 @@
+{
+  "clean_books_checked": true,
+  "config": {
+    "config_version": "1.0",
+    "cross_currency_share": 0.3,
+    "customers": [
+      10,
+      18
+    ],
+    "distractors": {
+      "recurring_amounts": true,
+      "refunds": true,
+      "split_payments": true,
+      "timezone_edges": true,
+      "unreferenced_receipts": true
+    },
+    "errors": {
+      "duplicate_invoice": 0,
+      "fx_rate": 0,
+      "payment_allocation": 0,
+      "period_cutoff": 0
+    },
+    "foreign_currencies": [
+      1,
+      3
+    ],
+    "interactions": {
+      "duplicate_fx": 0,
+      "fx_partial_boundary": 0
+    },
+    "invoices": [
+      50,
+      85
+    ],
+    "late_invoices": [
+      3,
+      6
+    ],
+    "ledger_order": "chronological",
+    "period": "month",
+    "presentation_seed": null,
+    "preset": "clean"
+  },
+  "config_digest": "ab0da86150fa0cad",
+  "generator_version": "0.4.1",
+  "mutations": [],
+  "plan": {
+    "interactions": [],
+    "singles": []
+  },
+  "presentation_seed": 1001,
+  "schema_version": "1.0",
+  "seed": 1001,
+  "world": {
+    "base_currency": "KZT",
+    "foreign_currencies": [
+      "TRY"
+    ],
+    "rate_rule": "transaction_local_date",
+    "timezone": "+06:00"
+  }
+}

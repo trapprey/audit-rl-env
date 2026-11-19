@@ -1,0 +1,59 @@
+{
+  "episode_id": "EP-ab836a09ef5a",
+  "issues": [
+    {
+      "affected_ids": [
+        "KA/26/05418",
+        "KA/26/05420"
+      ],
+      "currency": "TRY",
+      "evidence_sets": [
+        [
+          "D48f922711",
+          "Dab7c97a08"
+        ]
+      ],
+      "expected_amount_minor": 10091200,
+      "issue_id": "ISS-01",
+      "scenario": "single",
+      "type": "duplicate_invoice"
+    },
+    {
+      "affected_ids": [
+        "KA/26/05446",
+        "KA/26/05453"
+      ],
+      "currency": "TRY",
+      "evidence_sets": [
+        [
+          "D81dc71fee",
+          "D9f959053e"
+        ]
+      ],
+      "expected_amount_minor": 72095100,
+      "issue_id": "ISS-02",
+      "scenario": "single",
+      "type": "duplicate_invoice"
+    },
+    {
+      "affected_ids": [
+        "KA/26/05493"
+      ],
+      "currency": "GBP",
+      "evidence_sets": [
+        [
+          "D9f3e3f035",
+          "GL020444"
+        ],
+        [
+          "D9f3e3f035",
+          "GL020538"
+        ]
+      ],
+      "expected_amount_minor": 186300,
+      "issue_id": "ISS-03",
+      "scenario": "single",
+      "type": "period_cutoff"
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "episode_id": "EP-7cf3bce9f432",
+  "issues": [
+    {
+      "affected_ids": [
+        "HR/26/07111",
+        "RC0090611"
+      ],
+      "currency": "CHF",
+      "evidence_sets": [
+        [
+          "2026-04-09:CHF:USD",
+          "DOC-0fe7-8081",
+          "JE-257407f",
+          "JE-7f2618d"
+        ],
+        [
+          "2026-04-09:CHF:USD",
+          "DOC-0fe7-8081",
+          "JE-18c303c",
+          "JE-257407f"
+        ]
+      ],
+      "expected_amount_minor": 3671,
+      "issue_id": "ISS-01",
+      "scenario": "single",
+      "type": "fx_rate"
+    },
+    {
+      "affected_ids": [
+        "HR/26/07124",
+        "RC6277964"
+      ],
+      "currency": "CHF",
+      "evidence_sets": [
+        [
+          "2026-04-19:CHF:USD",
+          "DOC-b375-98a1",
+          "JE-7cd2bf3",
+          "JE-e87e2b4"
+        ],
+        [
+          "2026-04-19:CHF:USD",
+          "DOC-b375-98a1",
+          "JE-d054782",
+          "JE-e87e2b4"
+        ]
+      ],
+      "expected_amount_minor": 6393,
+      "issue_id": "ISS-02",
+      "scenario": "single",
+      "type": "fx_rate"
+    },
+    {
+      "affected_ids": [
+        "HR/26/07146",
+        "RC6430121"
+      ],
+      "currency": "CHF",
+      "evidence_sets": [
+        [
+          "DOC-29a7-2cfb",
+          "JE-5b2e85f",
+          "JE-7e80f14"
+        ]
+      ],
+      "expected_amount_minor": 80153,
+      "issue_id": "ISS-03",
+      "scenario": "single",
+      "type": "payment_allocation"
+    },
+    {
+      "affected_ids": [
+        "HR/26/07163",
+        "RC2409997"
+      ],
+      "currency": "USD",
+      "evidence_sets": [
+        [
+          "DOC-9a92-1951",
+          "JE-1cfe62e",
+          "JE-c1b85c0"
+        ]
+      ],
+      "expected_amount_minor": 425638,
+      "issue_id": "ISS-04",
+      "scenario": "single",
+      "type": "payment_allocation"
+    },
+    {
+      "affected_ids": [
+        "HR/26/07184"
+      ],
+      "currency": "CHF",
+      "evidence_sets": [
+        [
+          "DOC-1f68-8d43",
+          "JE-a7b053c"
+        ],
+        [
+          "DOC-1f68-8d43",
+          "JE-b990211"
+        ]
+      ],
+      "expected_amount_minor": 828400,
+      "issue_id": "ISS-05",
+      "scenario": "single",
+      "type": "period_cutoff"
+    },
+    {
+      "affected_ids": [
+        "HR/26/07187"
+      ],
+      "currency": "USD",
+      "evidence_sets": [
+        [
+          "DOC-2aa2-3b46",
+          "JE-3d147ae"
+        ],
+        [
+          "DOC-2aa2-3b46",
+          "JE-91ccb22"
+        ]
+      ],
+      "expected_amount_minor": 149200,
+      "issue_id": "ISS-06",
+      "scenario": "single",
+      "type": "period_cutoff"
+    }
+  ]
+}

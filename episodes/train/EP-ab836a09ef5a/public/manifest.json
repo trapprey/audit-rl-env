@@ -1,0 +1,27 @@
+{
+  "base_currency": "GBP",
+  "config_version": "1.0",
+  "currency_exponents": {
+    "GBP": 2,
+    "TRY": 2
+  },
+  "document_count": 139,
+  "episode_id": "EP-ab836a09ef5a",
+  "generator_version": "0.4.1",
+  "period_end": "2026-04-01T00:00:00-03:00",
+  "period_end_exclusive": true,
+  "period_start": "2026-03-01T00:00:00-03:00",
+  "record_counts": {
+    "fx": 61,
+    "invoices": 89,
+    "ledger": 277,
+    "payments": 50
+  },
+  "rounding": {
+    "amount_tolerance_minor": 1,
+    "fx": "ROUND_HALF_EVEN",
+    "money": "integer minor units"
+  },
+  "schema_version": "1.0",
+  "timezone": "-03:00"
+}

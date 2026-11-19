@@ -1,0 +1,27 @@
+{
+  "base_currency": "USD",
+  "config_version": "1.0",
+  "currency_exponents": {
+    "CHF": 2,
+    "USD": 2
+  },
+  "document_count": 141,
+  "episode_id": "EP-7cf3bce9f432",
+  "generator_version": "0.4.1",
+  "period_end": "2026-05-01T00:00:00+00:00",
+  "period_end_exclusive": true,
+  "period_start": "2026-04-01T00:00:00+00:00",
+  "record_counts": {
+    "fx": 60,
+    "invoices": 87,
+    "ledger": 300,
+    "payments": 54
+  },
+  "rounding": {
+    "amount_tolerance_minor": 1,
+    "fx": "ROUND_HALF_EVEN",
+    "money": "integer minor units"
+  },
+  "schema_version": "1.0",
+  "timezone": "+00:00"
+}

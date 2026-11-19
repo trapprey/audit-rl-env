@@ -1,0 +1,22 @@
+{
+  "episode_id": "EP-8c5d6896756e",
+  "issues": [
+    {
+      "affected_ids": [
+        "SI0007533",
+        "SI0007534"
+      ],
+      "currency": "USD",
+      "evidence_sets": [
+        [
+          "DOC-073a-08ab",
+          "DOC-e37d-9186"
+        ]
+      ],
+      "expected_amount_minor": 239400,
+      "issue_id": "ISS-01",
+      "scenario": "single",
+      "type": "duplicate_invoice"
+    }
+  ]
+}

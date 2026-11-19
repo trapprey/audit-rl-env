@@ -1,0 +1,157 @@
+{
+  "clean_books_checked": true,
+  "config": {
+    "config_version": "1.0",
+    "cross_currency_share": 0.3,
+    "customers": [
+      10,
+      18
+    ],
+    "distractors": {
+      "recurring_amounts": true,
+      "refunds": true,
+      "split_payments": true,
+      "timezone_edges": true,
+      "unreferenced_receipts": true
+    },
+    "errors": {
+      "duplicate_invoice": [
+        0,
+        2
+      ],
+      "fx_rate": [
+        0,
+        2
+      ],
+      "payment_allocation": [
+        0,
+        2
+      ],
+      "period_cutoff": [
+        0,
+        2
+      ]
+    },
+    "foreign_currencies": [
+      1,
+      3
+    ],
+    "interactions": {
+      "duplicate_fx": 0,
+      "fx_partial_boundary": 0
+    },
+    "invoices": [
+      50,
+      85
+    ],
+    "late_invoices": [
+      3,
+      6
+    ],
+    "ledger_order": "chronological",
+    "period": "month",
+    "presentation_seed": null,
+    "preset": "standard"
+  },
+  "config_digest": "8b54a1cb728ff2f9",
+  "generator_version": "0.4.1",
+  "mutations": [
+    {
+      "applied_after": 0,
+      "applied_before": 7707228,
+      "invoice": "INV-2025-00803",
+      "ledger_rows": [
+        "GL010860"
+      ],
+      "op": "reduce_allocation",
+      "payment": "BNK-9431-2170",
+      "scenario": "single"
+    },
+    {
+      "converted_after": 49235669,
+      "converted_before": 49572277,
+      "invoice": "INV-2025-00788",
+      "ledger_rows": [
+        "GL010789",
+        "GL010791"
+      ],
+      "op": "wrong_rate_date",
+      "payment": "BNK-0140-6505",
+      "policy_rate_date": "2025-10-21",
+      "scenario": "single",
+      "used_rate_date": "2025-10-08"
+    },
+    {
+      "invoice": "INV-2025-00846",
+      "issued_at": "2025-11-04T08:23:00+00:00",
+      "ledger_rows": [
+        "GL010856",
+        "GL010857"
+      ],
+      "op": "early_posting",
+      "posted_at": "2025-10-28T04:51:00+00:00",
+      "scenario": "single"
+    },
+    {
+      "applied_after": 18907410,
+      "applied_before": 29005012,
+      "invoice": "INV-2025-00781",
+      "ledger_rows": [
+        "GL010772",
+        "GL010774"
+      ],
+      "op": "reduce_allocation",
+      "payment": "BNK-1600-7757",
+      "scenario": "single"
+    },
+    {
+      "converted_after": 52273961,
+      "converted_before": 51739213,
+      "invoice": "INV-2025-00774",
+      "ledger_rows": [
+        "GL010725",
+        "GL010722"
+      ],
+      "op": "wrong_rate_date",
+      "payment": "BNK-8223-4868",
+      "policy_rate_date": "2025-10-14",
+      "scenario": "single",
+      "used_rate_date": "2025-10-16"
+    },
+    {
+      "invoice": "INV-2025-00848",
+      "issued_at": "2025-11-05T14:58:00+00:00",
+      "ledger_rows": [
+        "GL010902",
+        "GL010903"
+      ],
+      "op": "early_posting",
+      "posted_at": "2025-10-31T20:57:00+00:00",
+      "scenario": "single"
+    }
+  ],
+  "plan": {
+    "interactions": [],
+    "singles": [
+      "payment_allocation",
+      "fx_rate",
+      "period_cutoff",
+      "payment_allocation",
+      "fx_rate",
+      "period_cutoff"
+    ]
+  },
+  "presentation_seed": 2007,
+  "schema_version": "1.0",
+  "seed": 2007,
+  "world": {
+    "base_currency": "KZT",
+    "foreign_currencies": [
+      "AED",
+      "EUR",
+      "TRY"
+    ],
+    "rate_rule": "transaction_local_date",
+    "timezone": "+00:00"
+  }
+}

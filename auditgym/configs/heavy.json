@@ -1,0 +1,24 @@
+{
+  "errors": {
+    "duplicate_invoice": [
+      1,
+      2
+    ],
+    "payment_allocation": [
+      1,
+      2
+    ],
+    "fx_rate": [
+      1,
+      2
+    ],
+    "period_cutoff": [
+      1,
+      2
+    ]
+  },
+  "interactions": {
+    "fx_partial_boundary": 1,
+    "duplicate_fx": 1
+  }
+}

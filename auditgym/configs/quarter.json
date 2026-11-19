@@ -1,0 +1,29 @@
+{
+  "period": "quarter",
+  "invoices": [
+    100,
+    160
+  ],
+  "customers": [
+    14,
+    24
+  ],
+  "errors": {
+    "duplicate_invoice": [
+      1,
+      2
+    ],
+    "payment_allocation": [
+      1,
+      2
+    ],
+    "fx_rate": [
+      1,
+      2
+    ],
+    "period_cutoff": [
+      1,
+      2
+    ]
+  }
+}

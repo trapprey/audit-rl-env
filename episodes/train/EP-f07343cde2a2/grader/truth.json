@@ -1,0 +1,85 @@
+{
+  "episode_id": "EP-f07343cde2a2",
+  "issues": [
+    {
+      "affected_ids": [
+        "TM/26/06335",
+        "TM/26/06339"
+      ],
+      "currency": "USD",
+      "evidence_sets": [
+        [
+          "DOC-6435-2be5",
+          "DOC-fa29-2f0c"
+        ]
+      ],
+      "expected_amount_minor": 254800,
+      "issue_id": "ISS-01",
+      "scenario": "single",
+      "type": "duplicate_invoice"
+    },
+    {
+      "affected_ids": [
+        "PMT-C7FCD8",
+        "TM/26/06285"
+      ],
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "2026-06-12:USD:KZT",
+          "DOC-b18c-014c",
+          "JE-9262a99",
+          "JE-ce00a31"
+        ],
+        [
+          "2026-06-12:USD:KZT",
+          "DOC-b18c-014c",
+          "JE-4373bae",
+          "JE-ce00a31"
+        ]
+      ],
+      "expected_amount_minor": 418936,
+      "issue_id": "ISS-02",
+      "scenario": "single",
+      "type": "fx_rate"
+    },
+    {
+      "affected_ids": [
+        "PMT-1617CE",
+        "TM/26/06278"
+      ],
+      "currency": "EUR",
+      "evidence_sets": [
+        [
+          "DOC-1d3e-6555",
+          "JE-9033dfe",
+          "JE-c8b1990"
+        ]
+      ],
+      "expected_amount_minor": 3005,
+      "issue_id": "ISS-03",
+      "scenario": "single",
+      "type": "payment_allocation"
+    },
+    {
+      "affected_ids": [
+        "TM/26/06344"
+      ],
+      "currency": "KZT",
+      "evidence_sets": [
+        [
+          "DOC-368d-0cd9",
+          "JE-8193e5d"
+        ],
+        [
+          "DOC-368d-0cd9",
+          "JE-20f19c7"
+        ]
+      ],
+      "expected_amount_minor": 278155400,
+      "issue_id": "ISS-04",
+      "scenario": "single",
+      "type": "period_cutoff"
+    }
+  ]
+}
