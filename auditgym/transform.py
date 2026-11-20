@@ -16,10 +16,11 @@ NAMESPACES = {
 
 def load_episode(folder):
     folder = Path(folder)
-    public = load_public(folder / "public")
-    truth = json.loads((folder / "grader" / "truth.json").read_text())
-    provenance_path = folder / "grader" / "provenance.json"
-    provenance = json.loads(provenance_path.read_text()) if provenance_path.exists() else {}
+    public = load_public(folder / "public" if (folder / "public").is_dir() else folder)
+    grader = folder / "grader" if (folder / "grader").is_dir() else folder
+    truth = json.loads((grader / "truth.json").read_text(encoding="utf-8"))
+    provenance_path = grader / "provenance.json"
+    provenance = json.loads(provenance_path.read_text(encoding="utf-8")) if provenance_path.exists() else {}
     return Episode(public, truth, provenance)
 
 

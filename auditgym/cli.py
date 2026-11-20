@@ -22,6 +22,7 @@ from .splits import SPLITS
 from .storage import save_episode, write_json
 
 EVAL_POLICIES = [*BASELINES, "scripted_auditor"]
+SPLIT_MODES = {"train": "train", "dev": "eval"}
 
 
 def _seeds(text):
@@ -179,7 +180,7 @@ def evaluate_split(split, out_dir, policies=EVAL_POLICIES):
     results = {}
     try:
         for name in policies:
-            summaries = run_policy(name, SPLITS[split], mode="eval", sink=writer, log_path=log_path)
+            summaries = run_policy(name, SPLITS[split], mode=SPLIT_MODES[split], sink=writer, log_path=log_path)
             results[name] = {"summary": aggregate(summaries), "by_type": by_type(summaries), "episodes": summaries}
     finally:
         writer.close()
@@ -234,12 +235,13 @@ def cmd_demo(args):
         action = policy.act(observation)
         observation, reward, terminated, truncated, info = env.step(action)
         done = terminated or truncated
-        if action["tool"] == "submit":
+        step = env.max_steps - observation["remaining_steps"]
+        if action["name"] == "submit":
             for f in action["args"]["findings"]["findings"]:
                 print(f"  finding {f['type']:<19} {f['affected_ids']} {f['claimed_amount_minor']} {f['currency']}")
         else:
-            result = observation.get("result", {})
-            print(f"step {observation['step']:>3}  {action['tool']} {action['args'].get('table', '')} "
+            result = observation.get("result") or {}
+            print(f"step {step:>3}  {action['name']} {action['args'].get('table', '')} "
                   f"-> {len(result.get('records', []))} records")
     print(f"reward={reward:.3f} metrics={info.get('metrics')}")
 

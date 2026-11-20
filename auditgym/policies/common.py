@@ -1,8 +1,8 @@
 from ..reconcile import Books, finding
 
 
-def act(tool, **args):
-    return {"tool": tool, "args": args}
+def act(name, **args):
+    return {"name": name, "args": args}
 
 
 class TableReader:
@@ -25,7 +25,7 @@ class TableReader:
             return
         table, self.pending = self.pending, None
         result = observation.get("result")
-        if not result or result.get("table") != table:
+        if not isinstance(result, dict) or "records" not in result:
             self.queue.pop(0)
             self.cursor = None
             return

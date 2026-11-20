@@ -24,7 +24,7 @@
     },
     "episodes": [
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-567720562ce4",
         "judge": {
           "by_type": {
@@ -65,15 +65,25 @@
           "valid": true
         },
         "policy": "flag_all",
-        "seconds": 0.11526480002794415,
+        "seconds": 0.04677240199998778,
         "seed": 1001,
         "steps": 4,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 0,
+          "fp": 30,
+          "inspection_steps": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-7cf3bce9f432",
         "judge": {
           "by_type": {
@@ -114,15 +124,25 @@
           "valid": true
         },
         "policy": "flag_all",
-        "seconds": 0.01297279994469136,
+        "seconds": 0.017458971999985806,
         "seed": 1002,
         "steps": 4,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 6,
+          "fp": 30,
+          "inspection_steps": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-f07343cde2a2",
         "judge": {
           "by_type": {
@@ -163,15 +183,25 @@
           "valid": true
         },
         "policy": "flag_all",
-        "seconds": 0.013983200071379542,
+        "seconds": 0.014182674999972278,
         "seed": 1003,
         "steps": 4,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 4,
+          "fp": 30,
+          "inspection_steps": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-a878f562f778",
         "judge": {
           "by_type": {
@@ -212,15 +242,25 @@
           "valid": true
         },
         "policy": "flag_all",
-        "seconds": 0.01844290003646165,
+        "seconds": 0.017255728000009185,
         "seed": 1004,
         "steps": 4,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 5,
+          "fp": 30,
+          "inspection_steps": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-c2dcbc23b435",
         "judge": {
           "by_type": {
@@ -261,15 +301,25 @@
           "valid": true
         },
         "policy": "flag_all",
-        "seconds": 0.011431799968704581,
+        "seconds": 0.011163879999969595,
         "seed": 1005,
         "steps": 4,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 5,
+          "fp": 30,
+          "inspection_steps": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-4d718d984830",
         "judge": {
           "by_type": {
@@ -310,15 +360,25 @@
           "valid": true
         },
         "policy": "flag_all",
-        "seconds": 0.011731100035831332,
+        "seconds": 0.011681413000019347,
         "seed": 1006,
         "steps": 4,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 10,
+          "fp": 30,
+          "inspection_steps": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-f1f45e0dbb5c",
         "judge": {
           "by_type": {
@@ -359,15 +419,25 @@
           "valid": true
         },
         "policy": "flag_all",
-        "seconds": 0.009541799896396697,
+        "seconds": 0.009138881000012589,
         "seed": 1007,
         "steps": 4,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 0,
+          "fp": 30,
+          "inspection_steps": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-f20bf65f49f5",
         "judge": {
           "by_type": {
@@ -408,15 +478,25 @@
           "valid": true
         },
         "policy": "flag_all",
-        "seconds": 0.03155509999487549,
+        "seconds": 0.03263830699995651,
         "seed": 1008,
         "steps": 4,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 6,
+          "fp": 30,
+          "inspection_steps": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-e8055dda8499",
         "judge": {
           "by_type": {
@@ -457,15 +537,25 @@
           "valid": true
         },
         "policy": "flag_all",
-        "seconds": 0.014015299966558814,
+        "seconds": 0.014544049000051018,
         "seed": 1009,
         "steps": 4,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 6,
+          "fp": 30,
+          "inspection_steps": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-ab836a09ef5a",
         "judge": {
           "by_type": {
@@ -506,11 +596,21 @@
           "valid": true
         },
         "policy": "flag_all",
-        "seconds": 0.010956800077110529,
+        "seconds": 0.011152313999957641,
         "seed": 1010,
         "steps": 4,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 3,
+          "fp": 30,
+          "inspection_steps": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       }
     ],
@@ -521,7 +621,7 @@
       "precision": 0.0,
       "recall": 0.0,
       "return": -1.0,
-      "seconds": 0.024989560001995415,
+      "seconds": 0.018598862099992175,
       "steps": 4.0,
       "truncated": 0
     }
@@ -551,7 +651,7 @@
     },
     "episodes": [
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-567720562ce4",
         "judge": {
           "by_type": {
@@ -592,15 +692,25 @@
           "valid": true
         },
         "policy": "naive_reconciler",
-        "seconds": 0.11686860001645982,
+        "seconds": 0.04626224200001161,
         "seed": 1001,
         "steps": 9,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 0,
+          "fp": 6,
+          "inspection_steps": 8,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -0.5755555555555556,
         "episode_id": "EP-7cf3bce9f432",
         "judge": {
           "by_type": {
@@ -641,15 +751,25 @@
           "valid": true
         },
         "policy": "naive_reconciler",
-        "seconds": 0.01525299996137619,
+        "seconds": 0.013264977999995153,
         "seed": 1002,
         "steps": 11,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.2222222222222222,
+          "fn": 4,
+          "fp": 10,
+          "inspection_steps": 10,
+          "precision": 0.16666666666666666,
+          "recall": 0.3333333333333333,
+          "tp": 2,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -0.4846666666666667,
         "episode_id": "EP-f07343cde2a2",
         "judge": {
           "by_type": {
@@ -690,15 +810,25 @@
           "valid": true
         },
         "policy": "naive_reconciler",
-        "seconds": 0.01528859999962151,
+        "seconds": 0.014111606000028587,
         "seed": 1003,
         "steps": 10,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.26666666666666666,
+          "fn": 2,
+          "fp": 9,
+          "inspection_steps": 9,
+          "precision": 0.18181818181818182,
+          "recall": 0.5,
+          "tp": 2,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -0.5494117647058824,
         "episode_id": "EP-a878f562f778",
         "judge": {
           "by_type": {
@@ -739,15 +869,25 @@
           "valid": true
         },
         "policy": "naive_reconciler",
-        "seconds": 0.020014000008814037,
+        "seconds": 0.02743130599998267,
         "seed": 1004,
         "steps": 11,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.23529411764705882,
+          "fn": 3,
+          "fp": 10,
+          "inspection_steps": 10,
+          "precision": 0.16666666666666666,
+          "recall": 0.4,
+          "tp": 2,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -0.3493333333333334,
         "episode_id": "EP-c2dcbc23b435",
         "judge": {
           "by_type": {
@@ -788,15 +928,25 @@
           "valid": true
         },
         "policy": "naive_reconciler",
-        "seconds": 0.012193999951705337,
+        "seconds": 0.012678755000024466,
         "seed": 1005,
         "steps": 9,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.3333333333333333,
+          "fn": 2,
+          "fp": 10,
+          "inspection_steps": 8,
+          "precision": 0.23076923076923078,
+          "recall": 0.6,
+          "tp": 3,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -0.376,
         "episode_id": "EP-4d718d984830",
         "judge": {
           "by_type": {
@@ -837,15 +987,25 @@
           "valid": true
         },
         "policy": "naive_reconciler",
-        "seconds": 0.013016800046898425,
+        "seconds": 0.013522489000024507,
         "seed": 1006,
         "steps": 9,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.32,
+          "fn": 6,
+          "fp": 11,
+          "inspection_steps": 8,
+          "precision": 0.26666666666666666,
+          "recall": 0.4,
+          "tp": 4,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-f1f45e0dbb5c",
         "judge": {
           "by_type": {
@@ -886,15 +1046,25 @@
           "valid": true
         },
         "policy": "naive_reconciler",
-        "seconds": 0.010501899989321828,
+        "seconds": 0.010430255999949622,
         "seed": 1007,
         "steps": 9,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 0,
+          "fp": 13,
+          "inspection_steps": 8,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -0.5975555555555556,
         "episode_id": "EP-f20bf65f49f5",
         "judge": {
           "by_type": {
@@ -935,15 +1105,25 @@
           "valid": true
         },
         "policy": "naive_reconciler",
-        "seconds": 0.03905639995355159,
+        "seconds": 0.04183431200004861,
         "seed": 1008,
         "steps": 22,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.2222222222222222,
+          "fn": 3,
+          "fp": 18,
+          "inspection_steps": 21,
+          "precision": 0.14285714285714285,
+          "recall": 0.5,
+          "tp": 3,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -0.8295238095238096,
         "episode_id": "EP-e8055dda8499",
         "judge": {
           "by_type": {
@@ -984,15 +1164,25 @@
           "valid": true
         },
         "policy": "naive_reconciler",
-        "seconds": 0.0171938999556005,
+        "seconds": 0.017429681999999502,
         "seed": 1009,
         "steps": 11,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.09523809523809523,
+          "fn": 5,
+          "fp": 14,
+          "inspection_steps": 10,
+          "precision": 0.06666666666666667,
+          "recall": 0.16666666666666666,
+          "tp": 1,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -0.268,
         "episode_id": "EP-ab836a09ef5a",
         "judge": {
           "by_type": {
@@ -1033,11 +1223,21 @@
           "valid": true
         },
         "policy": "naive_reconciler",
-        "seconds": 0.013299699989147484,
+        "seconds": 0.013847741999995833,
         "seed": 1010,
         "steps": 10,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.375,
+          "fn": 0,
+          "fp": 10,
+          "inspection_steps": 9,
+          "precision": 0.23076923076923078,
+          "recall": 1.0,
+          "tp": 3,
+          "valid": true
+        },
         "truncated": false
       }
     ],
@@ -1048,7 +1248,7 @@
       "precision": 0.1452880452880453,
       "recall": 0.39,
       "return": -0.6030046685340803,
-      "seconds": 0.027268689987249673,
+      "seconds": 0.021081336800006057,
       "steps": 11.1,
       "truncated": 0
     }
@@ -1078,7 +1278,7 @@
     },
     "episodes": [
       {
-        "env_return": 0.0,
+        "env_return": 1.0,
         "episode_id": "EP-567720562ce4",
         "judge": {
           "by_type": {
@@ -1119,15 +1319,25 @@
           "valid": true
         },
         "policy": "oracle",
-        "seconds": 0.10793950001243502,
+        "seconds": 0.0458195109999906,
         "seed": 1001,
         "steps": 1,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": 1.0,
         "episode_id": "EP-7cf3bce9f432",
         "judge": {
           "by_type": {
@@ -1168,15 +1378,25 @@
           "valid": true
         },
         "policy": "oracle",
-        "seconds": 0.010884899995289743,
+        "seconds": 0.010229885000001104,
         "seed": 1002,
         "steps": 1,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 6,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": 1.0,
         "episode_id": "EP-f07343cde2a2",
         "judge": {
           "by_type": {
@@ -1217,15 +1437,25 @@
           "valid": true
         },
         "policy": "oracle",
-        "seconds": 0.011431600083597004,
+        "seconds": 0.012015186999974503,
         "seed": 1003,
         "steps": 1,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 4,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": 1.0,
         "episode_id": "EP-a878f562f778",
         "judge": {
           "by_type": {
@@ -1266,15 +1496,25 @@
           "valid": true
         },
         "policy": "oracle",
-        "seconds": 0.015091000008396804,
+        "seconds": 0.014466405000007398,
         "seed": 1004,
         "steps": 1,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 5,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": 1.0,
         "episode_id": "EP-c2dcbc23b435",
         "judge": {
           "by_type": {
@@ -1315,15 +1555,25 @@
           "valid": true
         },
         "policy": "oracle",
-        "seconds": 0.008386999950744212,
+        "seconds": 0.008383008000009795,
         "seed": 1005,
         "steps": 1,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 5,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": 1.0,
         "episode_id": "EP-4d718d984830",
         "judge": {
           "by_type": {
@@ -1364,15 +1614,25 @@
           "valid": true
         },
         "policy": "oracle",
-        "seconds": 0.010094900033436716,
+        "seconds": 0.009081357000013668,
         "seed": 1006,
         "steps": 1,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 10,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": 1.0,
         "episode_id": "EP-f1f45e0dbb5c",
         "judge": {
           "by_type": {
@@ -1413,15 +1673,25 @@
           "valid": true
         },
         "policy": "oracle",
-        "seconds": 0.007622099947184324,
+        "seconds": 0.006408867000004648,
         "seed": 1007,
         "steps": 1,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 0,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": 1.0,
         "episode_id": "EP-f20bf65f49f5",
         "judge": {
           "by_type": {
@@ -1462,15 +1732,25 @@
           "valid": true
         },
         "policy": "oracle",
-        "seconds": 0.030459599918685853,
+        "seconds": 0.030191840000043157,
         "seed": 1008,
         "steps": 1,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 6,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": 1.0,
         "episode_id": "EP-e8055dda8499",
         "judge": {
           "by_type": {
@@ -1511,15 +1791,25 @@
           "valid": true
         },
         "policy": "oracle",
-        "seconds": 0.013347000000067055,
+        "seconds": 0.012828165999962948,
         "seed": 1009,
         "steps": 1,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 6,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": 1.0,
         "episode_id": "EP-ab836a09ef5a",
         "judge": {
           "by_type": {
@@ -1560,11 +1850,21 @@
           "valid": true
         },
         "policy": "oracle",
-        "seconds": 0.00974010000936687,
+        "seconds": 0.009473265000053743,
         "seed": 1010,
         "steps": 1,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 0,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 3,
+          "valid": true
+        },
         "truncated": false
       }
     ],
@@ -1575,7 +1875,7 @@
       "precision": 0.8,
       "recall": 0.8,
       "return": 1.0,
-      "seconds": 0.02249976999592036,
+      "seconds": 0.015889749100006158,
       "steps": 1.0,
       "truncated": 0
     }
@@ -1605,7 +1905,7 @@
     },
     "episodes": [
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-567720562ce4",
         "judge": {
           "by_type": {
@@ -1646,15 +1946,25 @@
           "valid": true
         },
         "policy": "random_explorer",
-        "seconds": 0.11171969992574304,
+        "seconds": 0.06107646800001021,
         "seed": 1001,
         "steps": 5,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 0,
+          "fp": 2,
+          "inspection_steps": 4,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-7cf3bce9f432",
         "judge": {
           "by_type": {
@@ -1695,15 +2005,25 @@
           "valid": true
         },
         "policy": "random_explorer",
-        "seconds": 0.013625299907289445,
+        "seconds": 0.0124314379999646,
         "seed": 1002,
         "steps": 30,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 6,
+          "fp": 0,
+          "inspection_steps": 29,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-f07343cde2a2",
         "judge": {
           "by_type": {
@@ -1744,15 +2064,25 @@
           "valid": true
         },
         "policy": "random_explorer",
-        "seconds": 0.013119500013999641,
+        "seconds": 0.013590882999949372,
         "seed": 1003,
         "steps": 5,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 4,
+          "fp": 0,
+          "inspection_steps": 4,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-a878f562f778",
         "judge": {
           "by_type": {
@@ -1793,15 +2123,25 @@
           "valid": true
         },
         "policy": "random_explorer",
-        "seconds": 0.021931100054644048,
+        "seconds": 0.016236501999969732,
         "seed": 1004,
         "steps": 17,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 5,
+          "fp": 1,
+          "inspection_steps": 16,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-c2dcbc23b435",
         "judge": {
           "by_type": {
@@ -1842,15 +2182,25 @@
           "valid": true
         },
         "policy": "random_explorer",
-        "seconds": 0.012735299998894334,
+        "seconds": 0.011154492000002847,
         "seed": 1005,
         "steps": 29,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 5,
+          "fp": 2,
+          "inspection_steps": 28,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-4d718d984830",
         "judge": {
           "by_type": {
@@ -1891,15 +2241,25 @@
           "valid": true
         },
         "policy": "random_explorer",
-        "seconds": 0.014455900061875582,
+        "seconds": 0.012586695999971198,
         "seed": 1006,
         "steps": 24,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 10,
+          "fp": 0,
+          "inspection_steps": 23,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-f1f45e0dbb5c",
         "judge": {
           "by_type": {
@@ -1940,15 +2300,25 @@
           "valid": true
         },
         "policy": "random_explorer",
-        "seconds": 0.010863900068216026,
+        "seconds": 0.009194914999966386,
         "seed": 1007,
         "steps": 30,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 0,
+          "fp": 1,
+          "inspection_steps": 29,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-f20bf65f49f5",
         "judge": {
           "by_type": {
@@ -1989,15 +2359,25 @@
           "valid": true
         },
         "policy": "random_explorer",
-        "seconds": 0.033754799980670214,
+        "seconds": 0.03143369599996504,
         "seed": 1008,
         "steps": 20,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 6,
+          "fp": 0,
+          "inspection_steps": 19,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-e8055dda8499",
         "judge": {
           "by_type": {
@@ -2038,15 +2418,25 @@
           "valid": true
         },
         "policy": "random_explorer",
-        "seconds": 0.013732500025071204,
+        "seconds": 0.012744765000036296,
         "seed": 1009,
         "steps": 10,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 6,
+          "fp": 1,
+          "inspection_steps": 9,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": -1.0,
         "episode_id": "EP-ab836a09ef5a",
         "judge": {
           "by_type": {
@@ -2087,11 +2477,21 @@
           "valid": true
         },
         "policy": "random_explorer",
-        "seconds": 0.012520699994638562,
+        "seconds": 0.010683514999982435,
         "seed": 1010,
         "steps": 19,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 0.0,
+          "fn": 3,
+          "fp": 2,
+          "inspection_steps": 18,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       }
     ],
@@ -2102,7 +2502,7 @@
       "precision": 0.0,
       "recall": 0.0,
       "return": -1.0,
-      "seconds": 0.02584587000310421,
+      "seconds": 0.01911333699998181,
       "steps": 18.9,
       "truncated": 0
     }
@@ -2132,7 +2532,7 @@
     },
     "episodes": [
       {
-        "env_return": 0.0,
+        "env_return": 0.98,
         "episode_id": "EP-567720562ce4",
         "judge": {
           "by_type": {
@@ -2173,15 +2573,25 @@
           "valid": true
         },
         "policy": "scripted_auditor",
-        "seconds": 0.10787129995878786,
+        "seconds": 0.048059301000023424,
         "seed": 1001,
         "steps": 11,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 10,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": 0.976,
         "episode_id": "EP-7cf3bce9f432",
         "judge": {
           "by_type": {
@@ -2222,15 +2632,25 @@
           "valid": true
         },
         "policy": "scripted_auditor",
-        "seconds": 0.015656500007025898,
+        "seconds": 0.01620251100001724,
         "seed": 1002,
         "steps": 13,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 12,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 6,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": 0.976,
         "episode_id": "EP-f07343cde2a2",
         "judge": {
           "by_type": {
@@ -2271,15 +2691,25 @@
           "valid": true
         },
         "policy": "scripted_auditor",
-        "seconds": 0.018277299939654768,
+        "seconds": 0.01641568500002677,
         "seed": 1003,
         "steps": 13,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 12,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 4,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": 0.976,
         "episode_id": "EP-a878f562f778",
         "judge": {
           "by_type": {
@@ -2320,15 +2750,25 @@
           "valid": true
         },
         "policy": "scripted_auditor",
-        "seconds": 0.020938600064255297,
+        "seconds": 0.01793126199999051,
         "seed": 1004,
         "steps": 13,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 12,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 5,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": 0.976,
         "episode_id": "EP-c2dcbc23b435",
         "judge": {
           "by_type": {
@@ -2369,15 +2809,25 @@
           "valid": true
         },
         "policy": "scripted_auditor",
-        "seconds": 0.013717200024984777,
+        "seconds": 0.011545964999982061,
         "seed": 1005,
         "steps": 13,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 12,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 5,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": 0.978,
         "episode_id": "EP-4d718d984830",
         "judge": {
           "by_type": {
@@ -2418,15 +2868,25 @@
           "valid": true
         },
         "policy": "scripted_auditor",
-        "seconds": 0.014137699967250228,
+        "seconds": 0.012151672000015878,
         "seed": 1006,
         "steps": 12,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 11,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 10,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": 0.98,
         "episode_id": "EP-f1f45e0dbb5c",
         "judge": {
           "by_type": {
@@ -2467,15 +2927,25 @@
           "valid": true
         },
         "policy": "scripted_auditor",
-        "seconds": 0.010596900014206767,
+        "seconds": 0.009108152999999675,
         "seed": 1007,
         "steps": 11,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 10,
+          "precision": 0.0,
+          "recall": 0.0,
+          "tp": 0,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": 0.952,
         "episode_id": "EP-f20bf65f49f5",
         "judge": {
           "by_type": {
@@ -2516,15 +2986,25 @@
           "valid": true
         },
         "policy": "scripted_auditor",
-        "seconds": 0.03907310008071363,
+        "seconds": 0.043489340000007815,
         "seed": 1008,
         "steps": 25,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 24,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 6,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": 0.974,
         "episode_id": "EP-e8055dda8499",
         "judge": {
           "by_type": {
@@ -2565,15 +3045,25 @@
           "valid": true
         },
         "policy": "scripted_auditor",
-        "seconds": 0.018059900030493736,
+        "seconds": 0.016095946999996613,
         "seed": 1009,
         "steps": 14,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 13,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 6,
+          "valid": true
+        },
         "truncated": false
       },
       {
-        "env_return": 0.0,
+        "env_return": 0.978,
         "episode_id": "EP-ab836a09ef5a",
         "judge": {
           "by_type": {
@@ -2614,11 +3104,21 @@
           "valid": true
         },
         "policy": "scripted_auditor",
-        "seconds": 0.014355499995872378,
+        "seconds": 0.012132193000013558,
         "seed": 1010,
         "steps": 12,
         "terminated": true,
-        "train_metrics": null,
+        "train_metrics": {
+          "error": null,
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "inspection_steps": 11,
+          "precision": 1.0,
+          "recall": 1.0,
+          "tp": 3,
+          "valid": true
+        },
         "truncated": false
       }
     ],
@@ -2629,7 +3129,7 @@
       "precision": 0.8,
       "recall": 0.8,
       "return": 0.9746,
-      "seconds": 0.027268400008324534,
+      "seconds": 0.020313202900007356,
       "steps": 13.7,
       "truncated": 0
     }

@@ -4,11 +4,11 @@
   "title": "action",
   "type": "object",
   "required": [
-    "tool"
+    "name"
   ],
   "additionalProperties": false,
   "properties": {
-    "tool": {
+    "name": {
       "enum": [
         "list_records",
         "get_record",

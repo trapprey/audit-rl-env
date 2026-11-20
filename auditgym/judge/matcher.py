@@ -28,12 +28,10 @@ def _id_list(value, name, limit, allow_empty):
         raise SubmissionError(f"{name} has more than {limit} entries")
     if not value and not allow_empty:
         raise SubmissionError(f"{name} must not be empty")
-    out = []
     for item in value:
-        if not isinstance(item, str) or not item.strip() or len(item) > 100:
+        if not isinstance(item, str) or not item or len(item) > 100:
             raise SubmissionError(f"{name} entries must be non-empty strings")
-        out.append(item.strip())
-    return out
+    return list(value)
 
 
 def parse_submission(payload, episode_id):
@@ -60,8 +58,8 @@ def parse_submission(payload, episode_id):
         if not _is_int(amount) or not 0 <= amount <= spec.MAX_AMOUNT:
             raise SubmissionError(f"finding {index} amount must be a non-negative integer")
         currency = item["currency"]
-        if not isinstance(currency, str) or len(currency.strip()) != 3 or not currency.strip().isalpha():
-            raise SubmissionError(f"finding {index} currency must be a 3-letter code")
+        if not isinstance(currency, str) or not 1 <= len(currency) <= 10:
+            raise SubmissionError(f"finding {index} currency must be a short string")
         explanation = item["explanation"]
         if not isinstance(explanation, str) or len(explanation) > spec.MAX_EXPLANATION:
             raise SubmissionError(f"finding {index} explanation must be a string up to {spec.MAX_EXPLANATION} chars")
@@ -70,7 +68,7 @@ def parse_submission(payload, episode_id):
             item["type"],
             tuple(sorted(set(affected))),
             amount,
-            currency.strip().upper(),
+            currency,
             frozenset(evidence),
         ))
     return findings

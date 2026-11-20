@@ -7,7 +7,7 @@ from conftest import submit
 
 
 def calc():
-    return {"tool": "calculator", "args": {"expression": "1 + 1"}}
+    return {"name": "calculator", "args": {"expression": "1 + 1"}}
 
 
 def test_reset_contract(make_env):
@@ -15,8 +15,8 @@ def test_reset_contract(make_env):
     obs, info = env.reset(11, {"preset": "standard"})
     json.dumps(obs)
     json.dumps(info)
-    assert set(obs) == {"step", "steps_remaining", "task", "manifest", "policy", "tools"}
-    assert obs["steps_remaining"] == spec.MAX_STEPS
+    assert set(obs) == {"task", "manifest", "policy", "remaining_steps"}
+    assert obs["remaining_steps"] == spec.MAX_STEPS
     assert set(spec.FINDING_TYPES) == set(obs["policy"]["findings"])
     manifest = obs["manifest"]
     for key in ("schema_version", "episode_id", "base_currency", "period_start", "period_end", "timezone", "record_counts", "rounding"):
@@ -27,12 +27,14 @@ def test_reset_contract(make_env):
 def test_step_contract(make_env):
     env = make_env()
     env.reset(11)
-    out = env.step({"tool": "list_records", "args": {"table": "ledger"}})
+    out = env.step({"name": "list_records", "args": {"table": "ledger"}})
     assert len(out) == 5
     obs, reward, terminated, truncated, info = out
     json.dumps(obs)
     assert reward == 0.0 and terminated is False and truncated is False
-    assert obs["steps_remaining"] == spec.MAX_STEPS - 1
+    assert set(obs) == {"result", "error", "remaining_steps"} and obs["error"] is None
+    assert set(obs["result"]) == {"records", "next_cursor"}
+    assert obs["remaining_steps"] == spec.MAX_STEPS - 1
     assert len(obs["result"]["records"]) == spec.PAGE_LIMIT
 
 
@@ -48,7 +50,7 @@ def test_pagination_covers_table_once_and_cursors_are_stable(make_env, table):
     total = obs["manifest"]["record_counts"][table]
     seen, cursor, pages = [], None, []
     while True:
-        result = env.step({"tool": "list_records", "args": {"table": table, "cursor": cursor, "limit": 50}})[0]["result"]
+        result = env.step({"name": "list_records", "args": {"table": table, "cursor": cursor, "limit": 50}})[0]["result"]
         assert len(result["records"]) <= spec.PAGE_LIMIT
         pages.append((cursor, result["records"]))
         seen += result["records"]
@@ -58,25 +60,25 @@ def test_pagination_covers_table_once_and_cursors_are_stable(make_env, table):
     assert len(seen) == total
     key = {"ledger": "row_id", "invoices": "invoice_id", "payments": "payment_id", "fx": "fx_id"}[table]
     assert len({r[key] for r in seen}) == total
-    again = env.step({"tool": "list_records", "args": {"table": table, "cursor": pages[-1][0], "limit": 50}})[0]
+    again = env.step({"name": "list_records", "args": {"table": table, "cursor": pages[-1][0], "limit": 50}})[0]
     assert again["result"]["records"] == pages[-1][1]
 
 
 @pytest.mark.parametrize(
     "action, code",
     [
-        ({"tool": "list_records", "args": {"table": "ledger", "limit": 51}}, "bad_arguments"),
-        ({"tool": "list_records", "args": {"table": "ledger", "limit": 0}}, "bad_arguments"),
-        ({"tool": "list_records", "args": {"table": "secrets"}}, "bad_arguments"),
-        ({"tool": "list_records", "args": {"table": "ledger", "cursor": "fx@50"}}, "bad_cursor"),
-        ({"tool": "list_records", "args": {"table": "ledger", "cursor": "ledger@99999999"}}, "bad_cursor"),
-        ({"tool": "list_records", "args": {"table": "ledger", "cursor": "ledger@-1"}}, "bad_cursor"),
-        ({"tool": "get_record", "args": {"table": "ledger", "id": "NOPE"}}, "not_found"),
-        ({"tool": "get_record", "args": {"table": "ledger"}}, "bad_arguments"),
-        ({"tool": "get_document", "args": {"doc_id": "NOPE"}}, "not_found"),
-        ({"tool": "calculator", "args": {"expression": "__import__('os')"}}, "calculator_error"),
-        ({"tool": "shell", "args": {"cmd": "ls"}}, "unknown_tool"),
-        ({"tool": "list_records", "args": "ledger"}, "bad_arguments"),
+        ({"name": "list_records", "args": {"table": "ledger", "limit": 51}}, "bad_arguments"),
+        ({"name": "list_records", "args": {"table": "ledger", "limit": 0}}, "bad_arguments"),
+        ({"name": "list_records", "args": {"table": "secrets"}}, "bad_arguments"),
+        ({"name": "list_records", "args": {"table": "ledger", "cursor": "fx@50"}}, "bad_cursor"),
+        ({"name": "list_records", "args": {"table": "ledger", "cursor": "ledger@99999999"}}, "bad_cursor"),
+        ({"name": "list_records", "args": {"table": "ledger", "cursor": "ledger@-1"}}, "bad_cursor"),
+        ({"name": "get_record", "args": {"table": "ledger", "id": "NOPE"}}, "not_found"),
+        ({"name": "get_record", "args": {"table": "ledger"}}, "bad_arguments"),
+        ({"name": "get_document", "args": {"doc_id": "NOPE"}}, "not_found"),
+        ({"name": "calculator", "args": {"expression": "__import__('os')"}}, "calculator_error"),
+        ({"name": "shell", "args": {"cmd": "ls"}}, "unknown_action"),
+        ({"name": "list_records", "args": "ledger"}, "bad_arguments"),
         ({"args": {}}, "invalid_action"),
         ("{not json", "invalid_action"),
         (42, "invalid_action"),
@@ -88,37 +90,37 @@ def test_bad_actions_cost_a_step_and_return_bounded_errors(make_env, action, cod
     obs, reward, terminated, truncated, _ = env.step(action)
     assert obs["error"]["code"] == code
     assert len(obs["error"]["message"]) <= 200
-    assert obs["steps_remaining"] == spec.MAX_STEPS - 1
+    assert obs["remaining_steps"] == spec.MAX_STEPS - 1
     assert (reward, terminated, truncated) == (0.0, False, False)
 
 
 def test_error_messages_do_not_echo_input(make_env):
     env = make_env()
     env.reset(13)
-    obs = env.step({"tool": "get_record", "args": {"table": "invoices", "id": "PROBE-12345"}})[0]
+    obs = env.step({"name": "get_record", "args": {"table": "invoices", "id": "PROBE-12345"}})[0]
     assert "PROBE-12345" not in json.dumps(obs)
 
 
 def test_lookup_tools(make_env):
     env = make_env()
     env.reset(14)
-    invoice = env.step({"tool": "list_records", "args": {"table": "invoices", "limit": 1}})[0]["result"]["records"][0]
-    by_id = env.step({"tool": "get_record", "args": {"table": "invoices", "id": invoice["invoice_id"]}})[0]
-    by_doc = env.step({"tool": "get_document", "args": {"doc_id": invoice["doc_id"]}})[0]
-    assert by_id["result"]["record"] == invoice == by_doc["result"]["document"]
-    fx = env.step({"tool": "list_records", "args": {"table": "fx", "limit": 1}})[0]["result"]["records"][0]
-    again = env.step({"tool": "get_record", "args": {"table": "fx", "id": fx["fx_id"]}})[0]
-    assert again["result"]["record"] == fx
-    value = env.step('{"tool": "calculator", "args": {"expression": "12.5 * 4"}}')[0]
-    assert value["result"]["value"] == "50"
+    invoice = env.step({"name": "list_records", "args": {"table": "invoices", "limit": 1}})[0]["result"]["records"][0]
+    by_id = env.step({"name": "get_record", "args": {"table": "invoices", "id": invoice["invoice_id"]}})[0]
+    by_doc = env.step({"name": "get_document", "args": {"doc_id": invoice["doc_id"]}})[0]
+    assert by_id["result"] == invoice == by_doc["result"]
+    fx = env.step({"name": "list_records", "args": {"table": "fx", "limit": 1}})[0]["result"]["records"][0]
+    again = env.step({"name": "get_record", "args": {"table": "fx", "id": fx["fx_id"]}})[0]
+    assert again["result"] == fx
+    value = env.step('{"name": "calculator", "args": {"expression": "12.5 * 4"}}')[0]
+    assert value["result"] == "50" and value["error"] is None
 
 
 def test_returned_records_cannot_mutate_the_environment(make_env):
     env = make_env()
     env.reset(14)
-    first = env.step({"tool": "list_records", "args": {"table": "ledger", "limit": 1}})[0]["result"]["records"][0]
+    first = env.step({"name": "list_records", "args": {"table": "ledger", "limit": 1}})[0]["result"]["records"][0]
     first["debit_minor"] = -1
-    again = env.step({"tool": "list_records", "args": {"table": "ledger", "limit": 1}})[0]["result"]["records"][0]
+    again = env.step({"name": "list_records", "args": {"table": "ledger", "limit": 1}})[0]["result"]["records"][0]
     assert again["debit_minor"] != -1
 
 
@@ -130,7 +132,7 @@ def test_step_limit_truncates_with_empty_answer(make_env):
         assert not terminated and not truncated
     obs, reward, terminated, truncated, info = env.step(calc())
     assert truncated is True and terminated is False
-    assert obs["steps_remaining"] == 0
+    assert obs["remaining_steps"] == 0
     assert info["metrics"]["f1"] == 0.0
     assert reward == pytest.approx(-1.0)
     after = env.step(calc())
@@ -162,10 +164,10 @@ def test_submit_terminates_and_resubmission_is_ignored(make_env):
 def test_invalid_submission_ends_episode_with_minus_one(make_env):
     env = make_env()
     env.reset(17)
-    obs, reward, terminated, truncated, info = env.step({"tool": "submit", "args": {"findings": {"oops": True}}})
+    obs, reward, terminated, truncated, info = env.step({"name": "submit", "args": {"findings": {"oops": True}}})
     assert terminated and reward == -1.0
     assert info["metrics"]["valid"] is False
-    assert env.step({"tool": "submit", "args": {}})[0]["error"]["code"] == "episode_finished"
+    assert env.step({"name": "submit", "args": {}})[0]["error"]["code"] == "episode_finished"
 
 
 def test_time_limit_truncates(make_env):
@@ -182,8 +184,8 @@ def test_reset_isolates_episodes(make_env):
     for _ in range(5):
         env.step(calc())
     obs, _ = env.reset(20)
-    assert obs["steps_remaining"] == spec.MAX_STEPS
-    first = env.step({"tool": "list_records", "args": {"table": "invoices", "limit": 5}})[0]
-    assert first["steps_remaining"] == spec.MAX_STEPS - 1
+    assert obs["remaining_steps"] == spec.MAX_STEPS
+    first = env.step({"name": "list_records", "args": {"table": "invoices", "limit": 5}})[0]
+    assert first["remaining_steps"] == spec.MAX_STEPS - 1
     env.reset(19)
-    assert env.step({"tool": "list_records", "args": {"table": "invoices", "limit": 5}})[0] != first
+    assert env.step({"name": "list_records", "args": {"table": "invoices", "limit": 5}})[0] != first

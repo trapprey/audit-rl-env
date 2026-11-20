@@ -40,7 +40,8 @@
           },
           "currency": {
             "type": "string",
-            "pattern": "^\\s*[A-Za-z]{3}\\s*$"
+            "minLength": 1,
+            "maxLength": 10
           },
           "evidence_ids": {
             "type": "array",

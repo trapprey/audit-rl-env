@@ -42,14 +42,14 @@ def test_trajectories_actions_and_submissions_match_schemas(make_env, policy):
         if action is None:
             continue
         assert validate(action, "action") == []
-        if action["tool"] == "submit":
+        if action["name"] == "submit":
             assert validate(action["args"]["findings"], "findings") == []
 
 
 def test_every_fx_record_seen_by_agent_has_an_id(make_env):
     env = make_env()
     env.reset(5)
-    records = env.step({"tool": "list_records", "args": {"table": "fx"}})[0]["result"]["records"]
+    records = env.step({"name": "list_records", "args": {"table": "fx"}})[0]["result"]["records"]
     assert all(validate(r, "fx_row") == [] and "fx_id" in r for r in records)
 
 
@@ -58,7 +58,7 @@ def test_every_fx_record_seen_by_agent_has_an_id(make_env):
     [
         ({"episode_id": "E", "findings": [{"type": "fraud"}]}, "findings"),
         ({"episode_id": "E", "findings": []}, "truth"),
-        ({"tool": "shell"}, "action"),
+        ({"name": "shell"}, "action"),
         ({"row_id": "R", "timestamp": "2026-01-01 10:00", "account": "1200", "debit_minor": 1, "credit_minor": 0,
           "currency": "USD", "entity_id": "C", "invoice_id": None, "payment_id": None}, "ledger_row"),
         ({"date": "2026-01-01", "source_currency": "EUR", "target_currency": "USD", "rate": "1e3"}, "fx_row"),

@@ -11,9 +11,9 @@ CLEAN = [(seed, {"preset": "clean"}) for seed in range(6)]
 def reward_of(env, seed, config, findings_fn, warmup=0):
     _, info = env.reset(seed, config)
     for _ in range(warmup):
-        env.step({"tool": "calculator", "args": {"expression": "1+1"}})
+        env.step({"name": "calculator", "args": {"expression": "1+1"}})
     findings = findings_fn(env, info)
-    return env.step({"tool": "submit", "args": {"findings": findings}})[1]
+    return env.step({"name": "submit", "args": {"findings": findings}})[1]
 
 
 def oracle(env, info):

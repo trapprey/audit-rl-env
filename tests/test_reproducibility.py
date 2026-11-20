@@ -44,11 +44,11 @@ def test_permutation_and_relabeling_preserve_oracle_and_reward(make_env, seed, p
 
     obs_a, _ = env.reset(seed, base_cfg)
     oracle_a = env.oracle_findings()
-    reward_a = env.step({"tool": "submit", "args": {"findings": oracle_a}})[1]
+    reward_a = env.step({"name": "submit", "args": {"findings": oracle_a}})[1]
 
     obs_b, _ = env.reset(seed, moved_cfg)
     oracle_b = env.oracle_findings()
-    reward_b = env.step({"tool": "submit", "args": {"findings": oracle_b}})[1]
+    reward_b = env.step({"name": "submit", "args": {"findings": oracle_b}})[1]
 
     assert reward_a == reward_b == 1.0
     shape = lambda o: sorted((f["type"], f["claimed_amount_minor"], f["currency"]) for f in o["findings"])
@@ -70,5 +70,5 @@ def test_old_ids_do_not_score_after_relabeling(make_env):
     stale = env.oracle_findings()
     _, info = env.reset(4, {"preset": "single", "presentation_seed": 999})
     stale["episode_id"] = info["episode_id"]
-    _, reward, _, _, info = env.step({"tool": "submit", "args": {"findings": stale}})
+    _, reward, _, _, info = env.step({"name": "submit", "args": {"findings": stale}})
     assert info["metrics"]["tp"] == 0 and reward == -1.0

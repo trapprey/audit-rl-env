@@ -13,7 +13,7 @@ def make_env():
 
 
 def submit(episode_id, findings):
-    return {"tool": "submit", "args": {"findings": {"episode_id": episode_id, "findings": findings}}}
+    return {"name": "submit", "args": {"findings": {"episode_id": episode_id, "findings": findings}}}
 
 
 def walk_keys(value):

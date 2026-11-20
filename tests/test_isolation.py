@@ -38,7 +38,7 @@ def test_environment_state_holds_no_truth():
     env = AuditEnv(judge=client, mode="eval")
     try:
         env.reset(9, {"preset": "heavy"})
-        env.step({"tool": "list_records", "args": {"table": "ledger"}})
+        env.step({"name": "list_records", "args": {"table": "ledger"}})
         state = {k: v for k, v in env.__dict__.items() if k != "judge"}
         dump = json.dumps(state, default=str)
         assert "evidence_sets" not in dump and "expected_amount_minor" not in dump
@@ -53,14 +53,14 @@ def test_eval_mode_hides_reward_and_diagnostics():
     env = AuditEnv(judge=client, mode="eval")
     try:
         _, info = env.reset(10, {"preset": "single"})
-        assert set(info) == {"episode_id", "mode", "steps_remaining"}
+        assert set(info) == {"episode_id", "mode"}
         obs, reward, terminated, _, info = env.step(submit(info["episode_id"], []))
         assert terminated and reward == 0.0
-        assert set(info) == {"steps_remaining"}
-        assert set(obs) == {"step", "steps_remaining", "result"}
+        assert info == {}
+        assert obs == {"result": {"accepted": True}, "error": None, "remaining_steps": 99}
         _, info = env.reset(10, {"preset": "single"})
-        obs, reward, _, _, info = env.step({"tool": "submit", "args": {"findings": "garbage"}})
-        assert reward == 0.0 and set(info) == {"steps_remaining"}
+        obs, reward, _, _, info = env.step({"name": "submit", "args": {"findings": "garbage"}})
+        assert reward == 0.0 and info == {} and obs["error"]["code"] == "invalid_submission"
         results = client.results()
         assert results[0]["reward"] == pytest.approx(-1.0)
         assert results[1]["valid"] is False
@@ -83,8 +83,8 @@ def test_subprocess_judge_matches_in_process_judge(make_env):
         a, _ = remote.reset(21, {"preset": "interacting"})
         b, _ = local.reset(21, {"preset": "interacting"})
         assert a == b
-        ra = remote.step({"tool": "submit", "args": {"findings": remote.oracle_findings()}})
-        rb = local.step({"tool": "submit", "args": {"findings": local.oracle_findings()}})
+        ra = remote.step({"name": "submit", "args": {"findings": remote.oracle_findings()}})
+        rb = local.step({"name": "submit", "args": {"findings": local.oracle_findings()}})
         assert ra[1] == rb[1] == 1.0
     finally:
         client.close()

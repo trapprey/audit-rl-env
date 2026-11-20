@@ -17,17 +17,17 @@ def nested(depth):
 
 
 HOSTILE_ACTIONS = [
-    {"tool": "list_records", "args": {"table": ["ledger"]}},
-    {"tool": "list_records", "args": {"table": {"name": "ledger"}}},
-    {"tool": "get_record", "args": {"table": {"a": 1}, "id": "x"}},
-    {"tool": "get_record", "args": {"table": "ledger", "id": ["x"]}},
-    {"tool": "get_document", "args": {"doc_id": {"x": 1}}},
-    {"tool": "list_records", "args": {"table": "ledger", "cursor": 50}},
-    {"tool": "list_records", "args": {"table": "ledger", "cursor": "ledger@٥٠"}},
-    {"tool": "list_records", "args": {"table": "ledger", "limit": 50.0}},
-    {"tool": "calculator", "args": {"expression": nested(3000)}},
-    {"tool": "calculator", "args": {"expression": "9" * 299}},
-    {"tool": ["submit"], "args": {}},
+    {"name": "list_records", "args": {"table": ["ledger"]}},
+    {"name": "list_records", "args": {"table": {"name": "ledger"}}},
+    {"name": "get_record", "args": {"table": {"a": 1}, "id": "x"}},
+    {"name": "get_record", "args": {"table": "ledger", "id": ["x"]}},
+    {"name": "get_document", "args": {"doc_id": {"x": 1}}},
+    {"name": "list_records", "args": {"table": "ledger", "cursor": 50}},
+    {"name": "list_records", "args": {"table": "ledger", "cursor": "ledger@٥٠"}},
+    {"name": "list_records", "args": {"table": "ledger", "limit": 50.0}},
+    {"name": "calculator", "args": {"expression": nested(3000)}},
+    {"name": "calculator", "args": {"expression": "9" * 299}},
+    {"name": ["submit"], "args": {}},
     "[" * 100_000 + "]" * 100_000,
     "[" * 300_000,
     b"\xff\xfe",
@@ -40,9 +40,9 @@ def test_hostile_actions_return_errors_instead_of_crashing(make_env, action):
     env = make_env()
     env.reset(1)
     obs, reward, terminated, truncated, _ = env.step(action)
-    assert "error" in obs
+    assert obs["error"] is not None and obs["result"] is None
     assert (reward, terminated, truncated) == (0.0, False, False)
-    assert obs["steps_remaining"] == spec.MAX_STEPS - 1
+    assert obs["remaining_steps"] == spec.MAX_STEPS - 1
 
 
 @pytest.mark.parametrize(
@@ -60,7 +60,7 @@ def test_unserializable_submissions_score_minus_one_through_subprocess_judge(fin
     env = AuditEnv(judge=client, mode="train")
     try:
         env.reset(3, {"preset": "single"})
-        obs, reward, terminated, truncated, info = env.step({"tool": "submit", "args": {"findings": findings}})
+        obs, reward, terminated, truncated, info = env.step({"name": "submit", "args": {"findings": findings}})
         assert terminated and reward == -1.0
         assert info["metrics"]["valid"] is False
     finally:

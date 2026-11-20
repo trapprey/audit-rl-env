@@ -19,7 +19,7 @@
     "payments": 45
   },
   "rounding": {
-    "amount_tolerance_minor": 1,
+    "amount_tolerance_minor": 0,
     "fx": "ROUND_HALF_EVEN",
     "money": "integer minor units"
   },

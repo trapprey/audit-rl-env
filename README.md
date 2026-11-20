@@ -20,13 +20,35 @@ python -m auditgym check
 
 Что делает `check` (около 15 секунд):
 
-1. 273 теста среды, генератора, схем, matcher, награды, атак и утечек;
+1. 290 тестов среды, генератора, схем, matcher, награды, атак и утечек;
 2. генерирует 240 эпизодов всех пресетов и для каждого проверяет равенства, эталон, доказательства и решаемость в пределах 100 шагов;
 3. экспортирует 10 train + 10 dev эпизодов в `episodes/`;
 4. независимо проверяет экспортированные файлы, затем их копии с перемешанными строками и новыми ID;
-5. прогоняет базовые политики в режиме `eval`, пишет `runs/<split>/trajectories.jsonl`, `runs/<split>/judge_log.jsonl` и `reports/metrics.md`.
+5. прогоняет базовые политики и пишет `runs/<split>/trajectories.jsonl`, `runs/<split>/judge_log.jsonl` и `reports/metrics.md`. Train-сплит идёт в открытом режиме `train`: терминальная награда видна в траекториях. Dev-сплит идёт в закрытом режиме `eval`: награда в траекториях всегда 0 и хранится только в журнале оценщика.
 
 Последняя строка вывода — `CHECK PASSED`.
+
+## Интерфейс для жюри: `judge_adapter.py`
+
+Файл лежит в корне репозитория (в контейнере это `/app/judge_adapter.py`, `PYTHONPATH=/app`) и реализует опубликованный контракт проверок:
+
+```python
+from judge_adapter import generate_episode, make_env, score_episode
+
+generate_episode(seed, config, output_dir)
+env = make_env()
+obs, info = env.reset(seed, {"mode": "closed", "episode_dir": output_dir, "team_config": {}})
+obs, reward, terminated, truncated, info = env.step({"name": "list_records", "args": {"table": "ledger", "cursor": None, "limit": 50}})
+score = score_episode(output_dir, findings, inspection_steps)
+```
+
+- **`generate_episode(seed, config, output_dir)`** пишет эпизод в `output_dir/public/` (manifest.json, policy.json, ledger.csv, invoices.jsonl, payments.jsonl, fx.csv) и в `output_dir/grader/` (truth.json, provenance.json). `config` — наша конфигурация (например `{"preset": "heavy"}`) или обёртка `{"team_config": {...}}`.
+- **`make_env()`** возвращает среду. В закрытом режиме (`"mode": "closed"` и `episode_dir`) она читает только `public/` и никогда не открывает `grader/`, награда всегда 0, `info` пустой, а `submit` отвечает только `{"accepted": true}` или ограниченной ошибкой структуры. С `"mode": "train"` терминальная награда видна.
+- **`score_episode(episode_dir, findings, inspection_steps)`** возвращает `{tp, fp, fn, precision, recall, f1, return}`. Неверная структура даёт `return = -1`, остальные поля `null`, а ошибка пишется в журнал оценщика (`AUDITGYM_JUDGE_LOG`, по умолчанию `judge_log.jsonl`).
+- Действие — `{"name": ..., "args": {...}}`. Первое наблюдение — `{task, manifest, policy, remaining_steps: 100}`, следующие — `{result, error, remaining_steps}`.
+- Сравнение ID точное, `affected_ids` и `evidence_ids` сравниваются как множества, допуск по сумме 0.
+
+Поведение адаптера покрыто тестами, которые повторяют сценарий жюри: `tests/test_judge_adapter.py`.
 
 ## Как проверить каждый критерий
 
@@ -73,19 +95,19 @@ env = AuditEnv(mode="train")
 obs, info = env.reset(seed=42, config={"preset": "interacting"})
 episode_id = info["episode_id"]
 obs, reward, terminated, truncated, info = env.step(
-    {"tool": "list_records", "args": {"table": "ledger", "cursor": None, "limit": 50}}
+    {"name": "list_records", "args": {"table": "ledger", "cursor": None, "limit": 50}}
 )
 obs, reward, terminated, truncated, info = env.step(
-    {"tool": "submit", "args": {"findings": {"episode_id": episode_id, "findings": []}}}
+    {"name": "submit", "args": {"findings": {"episode_id": episode_id, "findings": []}}}
 )
 env.close()
 ```
 
 `AuditEnv(mode="train")` запускает оценщика отдельным процессом. `reset` также принимает `options=` вместо `config=` и `seed=None`, как в Gymnasium.
 
-Действие — JSON-объект `{"tool": ..., "args": {...}}`, можно строкой JSON:
+Действие — JSON-объект `{"name": ..., "args": {...}}`, можно строкой JSON:
 
-| инструмент | аргументы |
+| действие | аргументы |
 |---|---|
 | `list_records` | `table` ∈ ledger, invoices, payments, fx; `cursor` (null или из прошлой страницы); `limit` 1..50 |
 | `get_record` | `table`, `id` (row_id, invoice_id, payment_id или fx_id) |
@@ -96,7 +118,9 @@ env.close()
 Режимы:
 
 - **`train`** возвращает терминальную награду и метрики в `info`.
-- **`eval`** всегда отдаёт награду 0 и не показывает диагностику. Результаты остаются у оценщика: `JudgeClient.results()` и `--log`.
+- **`closed`** (он же `eval`) всегда отдаёт награду 0 и пустой `info`. Результаты остаются у оценщика: `score_episode`, `JudgeClient.results()` и `--log`.
+
+Ответ на действие — `{"result": ..., "error": null | {"code", "message"}, "remaining_steps": n}`: `list_records` даёт `{"records", "next_cursor"}`, `get_record` и `get_document` дают сам объект, `calculator` даёт десятичную строку.
 
 Для агента в отдельном процессе есть `python -m auditgym serve --mode eval`: одна JSON-строка на запрос (`reset`, `step`, `close`) через stdin/stdout.
 
@@ -150,6 +174,7 @@ python -m auditgym serve --mode eval                       # среда чере
 
 | путь | что внутри |
 |---|---|
+| `judge_adapter.py` | интерфейс для жюри: `generate_episode`, `make_env`, `score_episode` |
 | `auditgym/generator/` | мир компании, инжекторы ошибок, рендер в открытые таблицы |
 | `auditgym/verify.py` | проверка эталона только по видимым доказательствам |
 | `auditgym/reconcile.py` | полная сверка по опубликованной политике |
@@ -163,5 +188,5 @@ python -m auditgym serve --mode eval                       # среда чере
 | `episodes/` | 10 train + 10 dev эпизодов |
 | `runs/<split>/` | `trajectories.jsonl` всех базовых политик и `judge_log.jsonl` |
 | `reports/` | метрики и отчёт самопроверки |
-| `tests/` | 273 теста |
+| `tests/` | 290 тестов, включая сценарий жюри через `judge_adapter.py` |
 | `DESIGN.md` | записка о дизайне, поиск дыр, разбор сбоев, ограничения |

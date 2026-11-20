@@ -12,9 +12,9 @@
     186,
     759
   ],
-  "max_generate_seconds": 0.02145339990966022,
+  "max_generate_seconds": 0.021898706000001766,
   "max_pages_to_read_all": 30,
-  "mean_episode_seconds": 0.01196462458416742,
+  "mean_episode_seconds": 0.012293667183333194,
   "scenario_counts": {
     "duplicate_fx": 160,
     "fx_partial_boundary": 160,

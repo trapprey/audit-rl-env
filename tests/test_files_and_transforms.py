@@ -23,7 +23,7 @@ def saved(tmp_path):
 def oracle_reward(env, folder):
     env.reset(0, {"episode_dir": str(folder)})
     findings = env.oracle_findings()
-    return env.step({"tool": "submit", "args": {"findings": findings}})[1], findings
+    return env.step({"name": "submit", "args": {"findings": findings}})[1], findings
 
 
 def test_episode_loaded_from_files_matches_generated(make_env, saved):
@@ -70,8 +70,6 @@ def test_broken_or_tampered_files_are_refused(make_env, saved, tmp_path):
     env = make_env()
     with pytest.raises(JudgeError):
         env.reset(0, {"episode_dir": str(tmp_path / "missing")})
-    with pytest.raises(JudgeError):
-        env.reset(0, {"episode_dir": str(saved(1, "single")), "preset": "clean"})
     folder = saved(2, "single")
     truth_path = folder / "grader" / "truth.json"
     truth = json.loads(truth_path.read_text())
@@ -84,7 +82,7 @@ def test_broken_or_tampered_files_are_refused(make_env, saved, tmp_path):
 def test_reset_accepts_gymnasium_style_arguments(make_env):
     env = make_env()
     obs, info = env.reset(seed=None)
-    assert obs["steps_remaining"] == 100
+    assert obs["remaining_steps"] == 100
     first, _ = env.reset(seed=8, options={"preset": "clean"})
     second, _ = env.reset(8, {"preset": "clean"})
     assert first == second

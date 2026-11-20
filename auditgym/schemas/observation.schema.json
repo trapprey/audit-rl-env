@@ -4,14 +4,6 @@
   "title": "observation",
   "type": "object",
   "properties": {
-    "step": {
-      "type": "integer",
-      "minimum": 0
-    },
-    "steps_remaining": {
-      "type": "integer",
-      "minimum": 0
-    },
     "task": {
       "type": "string"
     },
@@ -21,14 +13,12 @@
     "policy": {
       "$ref": "policy.schema.json"
     },
-    "tools": {
-      "type": "object"
-    },
-    "result": {
-      "type": "object"
-    },
+    "result": {},
     "error": {
-      "type": "object",
+      "type": [
+        "object",
+        "null"
+      ],
       "properties": {
         "code": {
           "type": "string"
@@ -43,11 +33,14 @@
         "message"
       ],
       "additionalProperties": false
+    },
+    "remaining_steps": {
+      "type": "integer",
+      "minimum": 0
     }
   },
   "required": [
-    "step",
-    "steps_remaining"
+    "remaining_steps"
   ],
   "additionalProperties": false
 }

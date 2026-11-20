@@ -1,6 +1,6 @@
 SCHEMA_VERSION = "1.0"
 GENERATOR_VERSION = "0.4.1"
-ENV_VERSION = "0.4.1"
+ENV_VERSION = "0.5.0"
 
 FINDING_TYPES = ("duplicate_invoice", "payment_allocation", "fx_rate", "period_cutoff")
 INTERACTIONS = ("fx_partial_boundary", "duplicate_fx")
@@ -13,7 +13,7 @@ MAX_EVIDENCE = 10
 MAX_AFFECTED = 10
 MAX_EXPLANATION = 1000
 MAX_AMOUNT = 10**15
-AMOUNT_TOLERANCE_MINOR = 1
+AMOUNT_TOLERANCE_MINOR = 0
 STEP_COST = 0.002
 MAX_ISSUES = 12
 

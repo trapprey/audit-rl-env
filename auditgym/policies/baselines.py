@@ -19,20 +19,22 @@ class RandomExplorer:
         self.budget = self.rng.randint(3, 30)
         self.seen = defaultdict(set)
         self.cursors = {}
+        self.pending = None
 
     def _remember(self, observation):
-        result = observation.get("result") or {}
-        records = result.get("records") or []
-        if "record" in result:
-            records = [result["record"]]
-        if "document" in result:
-            records = [result["document"]]
-        for record in records:
+        result = observation.get("result")
+        table, self.pending = self.pending, None
+        if not isinstance(result, dict):
+            return
+        records = result.get("records") if "records" in result else [result]
+        for record in records or []:
+            if not isinstance(record, dict):
+                continue
             for key in ("row_id", "doc_id", "invoice_id", "payment_id", "fx_id"):
                 if record.get(key):
                     self.seen[key].add(record[key])
-        if result.get("table") and "next_cursor" in result:
-            self.cursors[result["table"]] = result["next_cursor"]
+        if table and "next_cursor" in result:
+            self.cursors[table] = result["next_cursor"]
 
     def _pick(self, key):
         values = sorted(self.seen.get(key, ()))
@@ -40,12 +42,13 @@ class RandomExplorer:
 
     def act(self, observation):
         self._remember(observation)
-        if self.budget <= 0 or observation["steps_remaining"] <= 1:
+        if self.budget <= 0 or observation["remaining_steps"] <= 1:
             return act("submit", findings={"episode_id": self.episode_id, "findings": self._guess()})
         self.budget -= 1
         choice = self.rng.random()
         if choice < 0.45:
             table = self.rng.choice(spec.TABLES)
+            self.pending = table
             return act("list_records", table=table, cursor=self.cursors.get(table), limit=self.rng.randint(1, 50))
         if choice < 0.65:
             table = self.rng.choice(["ledger", "invoices", "payments"])
@@ -55,7 +58,7 @@ class RandomExplorer:
             return act("get_document", doc_id=self._pick("doc_id"))
         if choice < 0.95:
             return act("calculator", expression=f"{self.rng.randint(1, 9999)} * {self.rng.random():.4f}")
-        return {"tool": self.rng.choice(["shell", "sql", "read_file"]), "args": {}}
+        return {"name": self.rng.choice(["shell", "sql", "read_file"]), "args": {}}
 
     def _guess(self):
         out = []
@@ -82,7 +85,7 @@ class NaiveReconciler:
 
     def act(self, observation):
         self.reader.absorb(observation)
-        if not self.reader.done and observation["steps_remaining"] > 1:
+        if not self.reader.done and observation["remaining_steps"] > 1:
             return self.reader.next_action()
         return act("submit", findings={"episode_id": self.manifest["episode_id"], "findings": self._rules()[: spec.MAX_FINDINGS]})
 
@@ -137,13 +140,15 @@ class FlagEverything:
         self.manifest = observation["manifest"]
         self.queue = ["invoices", "payments", "ledger"]
         self.data = defaultdict(list)
+        self.pending = None
 
     def act(self, observation):
-        result = observation.get("result") or {}
-        if result.get("records"):
-            self.data[result["table"]].extend(result["records"])
+        result = observation.get("result")
+        if self.pending and isinstance(result, dict) and result.get("records"):
+            self.data[self.pending].extend(result["records"])
         if self.queue:
-            return act("list_records", table=self.queue.pop(0), limit=50)
+            self.pending = self.queue.pop(0)
+            return act("list_records", table=self.pending, limit=50)
         return act("submit", findings={"episode_id": self.manifest["episode_id"], "findings": self._everything()})
 
     def _everything(self):

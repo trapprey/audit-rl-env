@@ -14,7 +14,7 @@ class ScriptedAuditor:
 
     def act(self, observation):
         self.reader.absorb(observation)
-        if not self.reader.done and observation["steps_remaining"] > 1:
+        if not self.reader.done and observation["remaining_steps"] > 1:
             return self.reader.next_action()
         books = Books(self.manifest, self.policy, self.reader.data)
         return act("submit", findings={"episode_id": self.manifest["episode_id"], "findings": audit(books)[: spec.MAX_FINDINGS]})

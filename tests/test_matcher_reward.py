@@ -110,12 +110,14 @@ def test_currency_must_match():
     assert run(wrong)["tp"] == 0
 
 
-def test_currency_and_ids_are_normalized():
-    loose = [f("duplicate_invoice", [" I2", "I1", "I1"], 50000, "usd", ["D2", "D1"])]
-    assert run(loose)["tp"] == 1
+def test_ids_use_set_semantics_but_exact_strings():
+    assert run([f("duplicate_invoice", ["I2", "I1", "I1"], 50000, "USD", ["D2", "D1", "D1"])])["tp"] == 1
+    assert run([f("duplicate_invoice", [" I2", "I1"], 50000, "USD", ["D2", "D1"])])["tp"] == 0
+    assert run([f("duplicate_invoice", ["i1", "i2"], 50000, "USD", ["D2", "D1"])])["tp"] == 0
+    assert run([f("duplicate_invoice", ["I1", "I2"], 50000, "usd", ["D2", "D1"])])["tp"] == 0
 
 
-@pytest.mark.parametrize("delta, matches", [(0, True), (1, True), (-1, True), (2, False), (-2, False)])
+@pytest.mark.parametrize("delta, matches", [(0, True), (1, False), (-1, False), (2, False), (-2, False)])
 def test_amount_tolerance(delta, matches):
     finding = [f("duplicate_invoice", ["I1", "I2"], 50000 + delta, "USD", ["D1", "D2"])]
     assert (run(finding)["tp"] == 1) is matches
@@ -144,7 +146,8 @@ BAD_PAYLOADS = [
     {"episode_id": EID, "findings": [dict(GOOD[0], claimed_amount_minor=True)]},
     {"episode_id": EID, "findings": [dict(GOOD[0], claimed_amount_minor=-5)]},
     {"episode_id": EID, "findings": [dict(GOOD[0], claimed_amount_minor=12.5)]},
-    {"episode_id": EID, "findings": [dict(GOOD[0], currency="DOLLARS")]},
+    {"episode_id": EID, "findings": [dict(GOOD[0], currency="")]},
+    {"episode_id": EID, "findings": [dict(GOOD[0], currency=840)]},
     {"episode_id": EID, "findings": [dict(GOOD[0], affected_ids=[])]},
     {"episode_id": EID, "findings": [dict(GOOD[0], affected_ids="I1")]},
     {"episode_id": EID, "findings": [dict(GOOD[0], evidence_ids=[f"L{i}" for i in range(11)])]},

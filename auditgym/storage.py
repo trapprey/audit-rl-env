@@ -20,7 +20,7 @@ def _parse(column, text):
 
 
 def write_csv(path, columns, rows):
-    with Path(path).open("w", newline="") as fh:
+    with Path(path).open("w", newline="", encoding="utf-8") as fh:
         writer = csv.writer(fh, lineterminator="\n")
         writer.writerow(columns)
         for row in rows:
@@ -28,25 +28,25 @@ def write_csv(path, columns, rows):
 
 
 def read_csv(path):
-    with Path(path).open(newline="") as fh:
+    with Path(path).open(newline="", encoding="utf-8") as fh:
         reader = csv.DictReader(fh)
         return [{k: _parse(k, v) for k, v in row.items()} for row in reader]
 
 
 def write_jsonl(path, rows):
-    with Path(path).open("w") as fh:
+    with Path(path).open("w", encoding="utf-8", newline="\n") as fh:
         for row in rows:
             fh.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
 
 
 def read_jsonl(path):
-    with Path(path).open() as fh:
+    with Path(path).open(encoding="utf-8") as fh:
         return [json.loads(line) for line in fh if line.strip()]
 
 
 def write_json(path, value):
     Path(path).parent.mkdir(parents=True, exist_ok=True)
-    Path(path).write_text(json.dumps(value, indent=2, ensure_ascii=False, sort_keys=True) + "\n")
+    Path(path).write_text(json.dumps(value, indent=2, ensure_ascii=False, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
 
 
 def save_episode(episode, folder):
@@ -69,8 +69,8 @@ def save_episode(episode, folder):
 def load_public(folder):
     folder = Path(folder)
     return {
-        "manifest": json.loads((folder / "manifest.json").read_text()),
-        "policy": json.loads((folder / "policy.json").read_text()),
+        "manifest": json.loads((folder / "manifest.json").read_text(encoding="utf-8")),
+        "policy": json.loads((folder / "policy.json").read_text(encoding="utf-8")),
         "ledger": read_csv(folder / "ledger.csv"),
         "invoices": read_jsonl(folder / "invoices.jsonl"),
         "payments": read_jsonl(folder / "payments.jsonl"),

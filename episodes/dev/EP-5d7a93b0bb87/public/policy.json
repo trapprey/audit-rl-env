@@ -1,5 +1,5 @@
 {
-  "amount_tolerance_minor": 1,
+  "amount_tolerance_minor": 0,
   "bookkeeping": {
     "invoice": "On issue: debit 1200 and credit 4000 for total_minor in invoice currency, timestamped at issue.",
     "open_items": "Invoices may stay partly or fully unpaid; that alone is not an error.",
