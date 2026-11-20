@@ -48,5 +48,6 @@
     "timezone_edges": true
   },
   "ledger_order": "chronological",
-  "presentation_seed": null
+  "presentation_seed": null,
+  "allocation_mode": "random"
 }

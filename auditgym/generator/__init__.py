@@ -37,7 +37,7 @@ def generate_episode(seed, config=None, secret=""):
         raise GenerationError("clean books violate invariants: " + "; ".join(problems[:5]))
 
     interactions, singles = draw_plan(content_rng, cfg)
-    issues, mutations = Injector(world, content_rng).run(interactions, singles)
+    issues, mutations = Injector(world, content_rng, cfg["allocation_mode"]).run(interactions, singles)
     problems = check_balance(world)
     if problems:
         raise GenerationError("books unbalanced after injection: " + "; ".join(problems[:5]))

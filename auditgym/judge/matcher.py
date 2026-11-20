@@ -11,7 +11,7 @@ class SubmissionError(ValueError):
 class Finding:
     index: int
     type: str
-    affected: tuple
+    affected: frozenset
     amount: int
     currency: str
     evidence: frozenset
@@ -21,25 +21,24 @@ def _is_int(value):
     return isinstance(value, int) and not isinstance(value, bool)
 
 
-def _id_list(value, name, limit, allow_empty):
+def _id_list(value, name, index, limit=None):
     if not isinstance(value, list):
-        raise SubmissionError(f"{name} must be a list")
-    if len(value) > limit:
-        raise SubmissionError(f"{name} has more than {limit} entries")
-    if not value and not allow_empty:
-        raise SubmissionError(f"{name} must not be empty")
+        raise SubmissionError(f"finding {index} {name} must be a list")
+    if limit is not None and len(value) > limit:
+        raise SubmissionError(f"finding {index} {name} has more than {limit} entries")
     for item in value:
-        if not isinstance(item, str) or not item or len(item) > 100:
-            raise SubmissionError(f"{name} entries must be non-empty strings")
-    return list(value)
+        if not isinstance(item, str):
+            raise SubmissionError(f"finding {index} {name} entries must be strings")
+    return value
 
 
 def parse_submission(payload, episode_id):
     if not isinstance(payload, dict):
         raise SubmissionError("submission must be an object")
-    if set(payload) != set(spec.SUBMISSION_KEYS):
-        raise SubmissionError("submission must have exactly episode_id and findings")
-    if payload["episode_id"] != episode_id:
+    missing = [k for k in spec.SUBMISSION_KEYS if k not in payload]
+    if missing:
+        raise SubmissionError(f"submission is missing {missing}")
+    if not isinstance(payload["episode_id"], str) or payload["episode_id"] != episode_id:
         raise SubmissionError("episode_id does not match")
     raw = payload["findings"]
     if not isinstance(raw, list):
@@ -48,36 +47,31 @@ def parse_submission(payload, episode_id):
         raise SubmissionError(f"more than {spec.MAX_FINDINGS} findings")
     findings = []
     for index, item in enumerate(raw):
-        if not isinstance(item, dict) or set(item) != set(spec.FINDING_KEYS):
-            raise SubmissionError(f"finding {index} must have exactly {list(spec.FINDING_KEYS)}")
-        if item["type"] not in spec.FINDING_TYPES:
-            raise SubmissionError(f"finding {index} has unknown type")
-        affected = _id_list(item["affected_ids"], "affected_ids", spec.MAX_AFFECTED, False)
-        evidence = _id_list(item["evidence_ids"], "evidence_ids", spec.MAX_EVIDENCE, True)
+        if not isinstance(item, dict):
+            raise SubmissionError(f"finding {index} must be an object")
+        missing = [k for k in spec.FINDING_KEYS if k not in item]
+        if missing:
+            raise SubmissionError(f"finding {index} is missing {missing}")
+        if not isinstance(item["type"], str):
+            raise SubmissionError(f"finding {index} type must be a string")
+        affected = _id_list(item["affected_ids"], "affected_ids", index)
+        evidence = _id_list(item["evidence_ids"], "evidence_ids", index, spec.MAX_EVIDENCE)
         amount = item["claimed_amount_minor"]
-        if not _is_int(amount) or not 0 <= amount <= spec.MAX_AMOUNT:
-            raise SubmissionError(f"finding {index} amount must be a non-negative integer")
-        currency = item["currency"]
-        if not isinstance(currency, str) or not 1 <= len(currency) <= 10:
-            raise SubmissionError(f"finding {index} currency must be a short string")
+        if not _is_int(amount):
+            raise SubmissionError(f"finding {index} claimed_amount_minor must be an integer")
+        if not isinstance(item["currency"], str):
+            raise SubmissionError(f"finding {index} currency must be a string")
         explanation = item["explanation"]
         if not isinstance(explanation, str) or len(explanation) > spec.MAX_EXPLANATION:
-            raise SubmissionError(f"finding {index} explanation must be a string up to {spec.MAX_EXPLANATION} chars")
-        findings.append(Finding(
-            index,
-            item["type"],
-            tuple(sorted(set(affected))),
-            amount,
-            currency,
-            frozenset(evidence),
-        ))
+            raise SubmissionError(f"finding {index} explanation must be a string up to {spec.MAX_EXPLANATION} characters")
+        findings.append(Finding(index, item["type"], frozenset(affected), amount, item["currency"], frozenset(evidence)))
     return findings
 
 
 def is_match(finding, issue, known_ids, tolerance=spec.AMOUNT_TOLERANCE_MINOR):
     if finding.type != issue["type"]:
         return False
-    if finding.affected != tuple(issue["affected_ids"]):
+    if finding.affected != frozenset(issue["affected_ids"]):
         return False
     if finding.currency != issue["currency"]:
         return False
@@ -88,13 +82,16 @@ def is_match(finding, issue, known_ids, tolerance=spec.AMOUNT_TOLERANCE_MINOR):
     return any(set(group) <= finding.evidence for group in issue["evidence_sets"])
 
 
-def match(findings, issues, known_ids, tolerance=spec.AMOUNT_TOLERANCE_MINOR):
-    edges = [[j for j, issue in enumerate(issues) if is_match(f, issue, known_ids, tolerance)] for f in findings]
+def _max_matching(adjacency, n_left, fixed):
     owner = {}
+    used_left = set()
+    for issue, finding in fixed.items():
+        owner[issue] = finding
+        used_left.add(finding)
 
     def augment(i, seen):
-        for j in edges[i]:
-            if j in seen:
+        for j in adjacency[i]:
+            if j in seen or j in fixed:
                 continue
             seen.add(j)
             if j not in owner or augment(owner[j], seen):
@@ -102,9 +99,33 @@ def match(findings, issues, known_ids, tolerance=spec.AMOUNT_TOLERANCE_MINOR):
                 return True
         return False
 
-    for i in range(len(findings)):
-        augment(i, set())
-    return sorted((i, j) for j, i in owner.items())
+    for i in range(n_left):
+        if i not in used_left:
+            augment(i, set())
+    return len(owner)
+
+
+def issue_key(issue, position):
+    return issue.get("issue_id", f"#{position:06d}")
+
+
+def match(findings, issues, known_ids, tolerance=spec.AMOUNT_TOLERANCE_MINOR):
+    adjacency = [[j for j, issue in enumerate(issues) if is_match(f, issue, known_ids, tolerance)] for f in findings]
+    best = _max_matching(adjacency, len(findings), {})
+    order = sorted(range(len(issues)), key=lambda j: issue_key(issues[j], j))
+    fixed = {}
+    for j in order:
+        if len(fixed) == best:
+            break
+        for i in range(len(findings)):
+            if j not in adjacency[i] or i in fixed.values():
+                continue
+            trial = dict(fixed)
+            trial[j] = i
+            if _max_matching(adjacency, len(findings), trial) == best:
+                fixed = trial
+                break
+    return sorted((i, j) for j, i in fixed.items())
 
 
 def scores(tp, fp, fn, n_truth, n_findings):
@@ -150,7 +171,8 @@ def evaluate(payload, truth, known_ids, inspection_steps, truncated=False):
         by_type[issue["type"]]["tp" if j in matched_issues else "fn"] += 1
     for finding in findings:
         if finding.index not in matched_findings:
-            by_type[finding.type]["fp"] += 1
+            by_type.setdefault(finding.type if finding.type in by_type else "unknown", {"tp": 0, "fp": 0, "fn": 0})
+            by_type[finding.type if finding.type in by_type else "unknown"]["fp"] += 1
     return {
         **base,
         "valid": True,
@@ -164,5 +186,5 @@ def evaluate(payload, truth, known_ids, inspection_steps, truncated=False):
         "reward": terminal_reward(f1, inspection_steps),
         "n_findings": len(findings),
         "by_type": by_type,
-        "matches": [[findings[i].index, issues[j]["issue_id"]] for i, j in pairs],
+        "matches": [[findings[i].index, issue_key(issues[j], j)] for i, j in pairs],
     }

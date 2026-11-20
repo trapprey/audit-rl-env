@@ -140,23 +140,42 @@ BAD_PAYLOADS = [
     {"episode_id": EID},
     {"episode_id": EID, "findings": {}},
     {"episode_id": "EP-other", "findings": []},
-    {"episode_id": EID, "findings": [], "extra": 1},
-    {"episode_id": EID, "findings": [dict(GOOD[0], extra=1)]},
-    {"episode_id": EID, "findings": [dict(GOOD[0], type="fraud")]},
+    {"episode_id": EID, "findings": [{k: v for k, v in GOOD[0].items() if k != "explanation"}]},
+    {"episode_id": EID, "findings": [dict(GOOD[0], type=7)]},
     {"episode_id": EID, "findings": [dict(GOOD[0], claimed_amount_minor=True)]},
-    {"episode_id": EID, "findings": [dict(GOOD[0], claimed_amount_minor=-5)]},
+    {"episode_id": EID, "findings": [dict(GOOD[0], claimed_amount_minor="50000")]},
     {"episode_id": EID, "findings": [dict(GOOD[0], claimed_amount_minor=12.5)]},
-    {"episode_id": EID, "findings": [dict(GOOD[0], currency="")]},
     {"episode_id": EID, "findings": [dict(GOOD[0], currency=840)]},
-    {"episode_id": EID, "findings": [dict(GOOD[0], affected_ids=[])]},
     {"episode_id": EID, "findings": [dict(GOOD[0], affected_ids="I1")]},
+    {"episode_id": EID, "findings": [dict(GOOD[0], affected_ids=[1, 2])]},
+    {"episode_id": EID, "findings": [dict(GOOD[0], evidence_ids=["D1"] * 10 + ["D2"])]},
     {"episode_id": EID, "findings": [dict(GOOD[0], evidence_ids=[f"L{i}" for i in range(11)])]},
     {"episode_id": EID, "findings": [dict(GOOD[0], explanation="x" * 1001)]},
     {"episode_id": EID, "findings": [GOOD[0]] * 31},
 ]
 
 
-@pytest.mark.parametrize("payload", BAD_PAYLOADS)
+FP_NOT_STRUCTURE = [
+    dict(GOOD[0], type="fraud"),
+    dict(GOOD[0], claimed_amount_minor=-5),
+    dict(GOOD[0], currency=""),
+    dict(GOOD[0], affected_ids=[]),
+]
+
+
+def test_extra_documented_fields_do_not_break_a_correct_finding():
+    result = evaluate({"episode_id": EID, "findings": [dict(GOOD[0], note="x")], "meta": 1}, TRUTH, KNOWN, 3)
+    assert result["valid"] and result["tp"] == 1
+
+
+@pytest.mark.parametrize("finding", FP_NOT_STRUCTURE, ids=["unknown_type", "negative", "empty_currency", "no_ids"])
+def test_structurally_valid_but_wrong_findings_are_false_positives(finding):
+    result = evaluate({"episode_id": EID, "findings": [finding]}, TRUTH, KNOWN, 3)
+    assert result["valid"] is True
+    assert (result["tp"], result["fp"]) == (0, 1)
+
+
+@pytest.mark.parametrize("payload", BAD_PAYLOADS, ids=[f"bad{i}" for i in range(len(BAD_PAYLOADS))])
 def test_invalid_structure_costs_minus_one(payload):
     result = evaluate(payload, TRUTH, KNOWN, 3)
     assert result["valid"] is False

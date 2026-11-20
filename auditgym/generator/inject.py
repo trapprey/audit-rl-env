@@ -48,9 +48,10 @@ def draw_plan(rng, cfg):
 
 
 class Injector:
-    def __init__(self, world, rng):
+    def __init__(self, world, rng, allocation_mode="random"):
         self.world = world
         self.rng = rng
+        self.allocation_mode = allocation_mode
         self.used_invoices = set()
         self.used_payments = set()
         self.issues = []
@@ -199,7 +200,12 @@ class Injector:
             alloc = rng.choice(booking.allocations)
         invoice = w.invoices[alloc.invoice]
         if ratio is None:
-            ratio = rng.choice([0.0, rng.uniform(0.35, 0.8)])
+            if self.allocation_mode == "missing":
+                ratio = 0.0
+            elif self.allocation_mode == "partial":
+                ratio = rng.uniform(0.35, 0.8)
+            else:
+                ratio = rng.choice([0.0, rng.uniform(0.35, 0.8)])
         before = alloc.applied
         kept = int(before * ratio)
         rates = w.rates(alloc.rate_day)

@@ -20,7 +20,7 @@ python -m auditgym check
 
 Что делает `check` (около 15 секунд):
 
-1. 290 тестов среды, генератора, схем, matcher, награды, атак и утечек;
+1. 343 теста среды, генератора, схем, matcher, награды, атак и утечек;
 2. генерирует 240 эпизодов всех пресетов и для каждого проверяет равенства, эталон, доказательства и решаемость в пределах 100 шагов;
 3. экспортирует 10 train + 10 dev эпизодов в `episodes/`;
 4. независимо проверяет экспортированные файлы, затем их копии с перемешанными строками и новыми ID;
@@ -48,7 +48,62 @@ score = score_episode(output_dir, findings, inspection_steps)
 - Действие — `{"name": ..., "args": {...}}`. Первое наблюдение — `{task, manifest, policy, remaining_steps: 100}`, следующие — `{result, error, remaining_steps}`.
 - Сравнение ID точное, `affected_ids` и `evidence_ids` сравниваются как множества, допуск по сумме 0.
 
-Поведение адаптера покрыто тестами, которые повторяют сценарий жюри: `tests/test_judge_adapter.py`.
+Поведение адаптера покрыто тестами, которые повторяют сценарий жюри: `tests/test_judge_adapter.py`. Все примеры из опубликованных определений (тесты matcher 1–20 и M01–M12) воспроизведены в `tests/test_published_rules.py`.
+
+**Рабочая директория и запуск в контейнере:** `/app`, `PYTHONPATH=/app`. Проверка: `python -m auditgym check`. Адаптер: `import judge_adapter`.
+
+### Четыре типа ошибок
+
+| ошибка из кейса | `type` | канонические `affected_ids` | сумма и валюта | минимальный набор доказательств |
+|---|---|---|---|---|
+| дубль счёта | `duplicate_invoice` | `invoice_id` оригинала и дубля | `total_minor` дубля, валюта счёта | `doc_id` обоих счетов |
+| пропущенное или частичное распределение платежа | `payment_allocation` | `payment_id` и `invoice_id` | неразнесённая часть ссылки, валюта платежа | `doc_id` платежа, строка 2400 этого платежа, строки 1200/1950, которые применили платёж в его валюте |
+| неверная дата или курс конвертации | `fx_rate` | `payment_id` и `invoice_id` | модуль разницы между проведённой суммой и пересчётом по policy, валюта счёта | `doc_id` платежа, строка 1950 в валюте платежа, строка 1200 (или 1950-дебет) в валюте счёта, `fx_id` каждого небазового курса |
+| ошибка отнесения к периоду | `period_cutoff` | `invoice_id` | `total_minor` счёта, валюта счёта | `doc_id` счёта и строка 1200-дебет (или 4000-кредит) |
+
+Правила matcher (код: `auditgym/judge/matcher.py`):
+
+- ID, `type` и `currency` сравниваются точно, с учётом регистра и пробелов. Валюта пишется ровно так, как в `manifest.currency_exponents`: три заглавные буквы.
+- `affected_ids` и `evidence_ids` сравниваются как множества.
+- Допуск суммы τ = 0 для всех типов (`policy.amount_tolerance_minor`).
+- Неизвестный тип, лишняя или пропущенная запись, неверная сумма или валюта дают FP.
+- Структурная ошибка (−1) — это отсутствующее обязательное поле, неверный JSON-тип значения, больше 30 находок, больше 10 доказательств или объяснение длиннее 1000 символов. Лимиты проверяются до удаления повторов.
+- Сопоставление — максимальное паросочетание. Если вариантов несколько, выбирается лексикографически наименьшая последовательность пар `(issue_id, индекс вывода)`.
+
+### Формат эталона и provenance
+
+`grader/truth.json`: `{"episode_id", "issues": [{"issue_id", "type", "affected_ids", "expected_amount_minor", "currency", "evidence_sets": [[...]], "scenario"}]}`. Поле `scenario` — `single`, `fx_partial_boundary` или `duplicate_fx`.
+
+`grader/provenance.json`: `seed`, `config`, версии, `plan` и `mutations`. В каждой мутации есть `op`, `scenario`, затронутые ID, `ledger_rows` (изменённые или добавленные строки) и значения до и после. Как вернуть книги в состояние до ошибки:
+
+| `op` | что сделано | как восстановить чистое состояние |
+|---|---|---|
+| `insert_duplicate_invoice` | добавлен документ-копия `duplicate` и его проводки `ledger_rows` | удалить документ `duplicate` и строки `ledger_rows` |
+| `reduce_allocation` | применено `applied_after` вместо `applied_before`, разница ушла в 2400 | применить полную сумму ссылки из документа платежа, убрать её из 2400 |
+| `wrong_rate_date` | пересчёт по курсу `used_rate_date` вместо `policy_rate_date` | заменить `converted_after` на `converted_before` в строках `ledger_rows` |
+| `early_posting` | счёт, выставленный `issued_at` после конца периода, проведён `posted_at` внутри него | удалить строки `ledger_rows`: счёт относится к следующему периоду |
+
+После такого восстановления все равенства из `DESIGN.md` («Проверка данных по файлам») выполняются. Это проверяет `python -m auditgym verify-episode`.
+
+### Как получить каждый сценарий закрытых эпизодов
+
+Конфигурация передаётся в `generate_episode(seed, config, output_dir)` напрямую или как `{"team_config": {...}}`. Ключи `errors` и `interactions` задают число ошибок каждого типа (число или `[min, max]`), остальные типы ставятся в 0:
+
+| сценарий | config |
+|---|---|
+| D01 чистая компания | `{"preset": "clean"}` |
+| D02 корректно разбитый платёж | `{"preset": "clean", "distractors": {"split_payments": true, "refunds": false, "recurring_amounts": false, "unreferenced_receipts": false, "timezone_edges": false}}` |
+| D03 корректный возврат | то же, но `"refunds": true`, а остальные `false` |
+| D04 законные повторяющиеся суммы | то же, но `"recurring_amounts": true` |
+| D05 корректная валютная или периодная граница | то же, но `"timezone_edges": true`, плюс `"cross_currency_share": 0.5` |
+| D06–D08 дубль счёта | `{"preset": "clean", "errors": {"duplicate_invoice": 1}}` |
+| D09–D11 распределение платежа | `{"preset": "clean", "errors": {"payment_allocation": 1}, "allocation_mode": "missing"}` или `"partial"` |
+| D12–D13 дата или курс конвертации | `{"preset": "clean", "errors": {"fx_rate": 1}}` |
+| D14–D15 ошибка периода | `{"preset": "clean", "errors": {"period_cutoff": 1}}` |
+| D16–D18 первое взаимодействие | `{"preset": "clean", "interactions": {"fx_partial_boundary": 1}}` — частичный платёж в другой валюте на границе периода |
+| D19–D20 второе взаимодействие | `{"preset": "clean", "interactions": {"duplicate_fx": 1}}` — дубль счёта, оплата которого пересчитана неверным курсом |
+
+Другие параметры (`period`, `customers`, `invoices`, `foreign_currencies`, `cross_currency_share`) меняют размер и состав компании. Все ключи и их допустимые значения описаны в `auditgym/configs/default.json` и проверяются в `auditgym/config.py`.
 
 ## Как проверить каждый критерий
 
@@ -188,5 +243,5 @@ python -m auditgym serve --mode eval                       # среда чере
 | `episodes/` | 10 train + 10 dev эпизодов |
 | `runs/<split>/` | `trajectories.jsonl` всех базовых политик и `judge_log.jsonl` |
 | `reports/` | метрики и отчёт самопроверки |
-| `tests/` | 290 тестов, включая сценарий жюри через `judge_adapter.py` |
+| `tests/` | 343 теста, включая сценарий жюри через `judge_adapter.py` и все опубликованные примеры matcher |
 | `DESIGN.md` | записка о дизайне, поиск дыр, разбор сбоев, ограничения |

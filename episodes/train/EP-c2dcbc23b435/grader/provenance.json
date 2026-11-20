@@ -1,6 +1,7 @@
 {
   "clean_books_checked": true,
   "config": {
+    "allocation_mode": "random",
     "config_version": "1.0",
     "cross_currency_share": 0.3,
     "customers": [

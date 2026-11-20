@@ -73,6 +73,8 @@ def resolve(config=None):
     for key, value in cfg["distractors"].items():
         if not isinstance(value, bool):
             raise ConfigError(f"distractors.{key} must be boolean")
+    if cfg["allocation_mode"] not in ("random", "missing", "partial"):
+        raise ConfigError("allocation_mode must be random, missing or partial")
     if cfg["ledger_order"] not in ("chronological", "shuffled"):
         raise ConfigError("ledger_order must be chronological or shuffled")
     ps = cfg["presentation_seed"]
@@ -83,5 +85,7 @@ def resolve(config=None):
 
 def digest(cfg):
     body = {k: v for k, v in cfg.items() if k not in ("presentation_seed", "preset", "ledger_order")}
+    if body.get("allocation_mode") == "random":
+        body.pop("allocation_mode")
     raw = json.dumps(body, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(raw.encode()).hexdigest()[:16]
